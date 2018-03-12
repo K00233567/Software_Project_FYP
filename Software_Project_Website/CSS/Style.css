@@ -365,6 +365,12 @@ form.BusinessSearch::after {
     text-align:center;
 }
 
+.imageEffect:hover{
+	-ms-transform: rotate(1deg); /* IE 9 */
+    -webkit-transform: rotate(1deg); /* Safari */
+    transform: rotate(1deg);
+}
+
 
 
 /*
