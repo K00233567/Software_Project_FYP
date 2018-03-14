@@ -18,7 +18,7 @@
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
-                <li><a href="#views/Login.php">Login</a></li>
+                <li><a href="views/CustomerHome.html">Login</a></li>
               </ul>
             </nav><!-- #nav-menu-container -->
           </div>
