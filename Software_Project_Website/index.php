@@ -8,23 +8,22 @@
   </head>
   <body>
 
+<nav>
 
       <header id="header">
           <div class="container">
 
             <div id="logo" class="pull-left">
               <h1>NOA</h1>
-              <!-- Uncomment below if you prefer to use an image logo -->
-              <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
-                <li><a href="Login.php">Login</a></li>
+                <li><a href="#views/Login.php">Login</a></li>
               </ul>
             </nav><!-- #nav-menu-container -->
           </div>
         </header><!-- #header -->
-
+</nav>
     <!--==========================
         Intro Section
       ============================-->
@@ -49,16 +48,13 @@
           <p>Please fill in this form to create an account.</p>
           <hr>
 
-          <label for="id"><b>ID</b></label>
-          <input type="text" placeholder="Enter ID" name="id" required>
-
-          <label for="name"><b>Name</b></label>
+          <label for="name" class="pull-left"><b>Name</b></label>
           <input type="text" placeholder="Enter Name" name="name" required>
 
-          <label for="email"><b>Email</b></label>
+          <label for="email" class="pull-left"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" required>
 
-          <label for="psw"><b>Password</b></label>
+          <label for="psw" class="pull-left"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required>
 
           <div class="clearfix">
@@ -72,13 +68,12 @@
 
     <?php
     if(isset($_POST['Customer_Submitted'])){
-    $ID = $_POST['id'];
     $Name = $_POST['name'];
     $CustomerEmail = $_POST['email'];
     $Password = $_POST['psw'];
     $connect = mysqli_connect('localhost','root','','event_management_system');
 
-    mysqli_query($connect,"INSERT INTO customer(customerID,nameC,emailC,pinC)VALUES('$ID','$Name','$CustomerEmail','$Password')");
+    mysqli_query($connect,"INSERT INTO customer(nameC,emailC,pinC)VALUES('$Name','$CustomerEmail','$Password')");
 
     if(mysqli_affected_rows($connect) >0){
       echo "Welcome, you have now created an account.";
@@ -105,31 +100,29 @@
             <h1>Business Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
             <hr>
-            <label for="bID"><b>Business Id</b></label>
-            <input type="text" placeholder="Enter Business Id" name="bID" required>
 
-            <label for="bname"><b>Business Name</b></label>
+            <label for="bname" class="pull-left"><b>Business Name</b></label>
             <input type="text" placeholder="Enter Business Name" name="bname" required>
 
-            <label for="btype"><b>Business Type</b></label>
+            <label for="btype" class="pull-left"><b>Business Type</b></label>
             <input type="text" placeholder="Enter Business Type" name="btype" required>
 
-            <label for="bemail"><b>Email</b></label>
+            <label for="bemail" class="pull-left"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="bemail" required>
 
-            <label for="telephone"><b>Telephone</b></label>
+            <label for="telephone" class="pull-left"><b>Telephone</b></label>
             <input type="number" placeholder="Enter Telephone" name="telephone" required><br><br><br>
 
-            <label for="stAddress"><b>Street Address</b></label>
+            <label for="stAddress" class="pull-left"><b>Street Address</b></label>
             <input type="text" placeholder="Enter Street Address" name="stAddress" required>
 
-            <label for="price"><b>Price Estimate of Product/Service</b></label>
+            <label for="price" class="pull-left"><b>Price Estimate of Product/Service</b></label>
             <input type="number" placeholder="Enter Price Estimate" name="price" required><br><br><br>
 
-            <label for="bpsw"><b>Password</b></label>
+            <label for="bpsw" class="pull-left"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="bpsw" required>
 
-            <label for="description"><b>Brief description of business</b></label>
+            <label for="description" class="pull-left"><b>Brief description of business</b></label>
             <input type="text" placeholder="Enter a brief description of your business" name="description" required>
 
             <div class="clearfix">
@@ -142,7 +135,6 @@
 
       <?php
       if(isset($_POST['Business_Submitted'])){
-      $BusinessID = $_POST['bID'];
       $BusinessName = $_POST['bname'];
       $Btype = $_POST['btype'];
       $BEmail = $_POST['bemail'];
@@ -154,7 +146,7 @@
 
       $connect = mysqli_connect('localhost','root','','event_management_system');
 
-      mysqli_query($connect,"INSERT INTO business(businessID,nameB,type,emailB,telephone,address,price,pinB,description)VALUES('$BusinessID','$BusinessName','$Btype','$BEmail','$Telephone','$StAddress','$Price','$PasswordB','$Description')");
+      mysqli_query($connect,"INSERT INTO business(nameB,type,emailB,telephone,address,price,pinB,description)VALUES('$BusinessName','$Btype','$BEmail','$Telephone','$StAddress','$Price','$PasswordB','$Description')");
 
       if(mysqli_affected_rows($connect) >0){
         echo "Welcome, you have now created an account.";

@@ -193,13 +193,29 @@ ul li a{
 }
 
 
-.panel-body{
+#CategoryPanel{
 	background: linear-gradient(to top left, #17202a 0%, #e5e8e8 100%);
 	margin-top: 0px;
 }
 
+ul.navbar-nav{
+	float: right;
+}
 
+.Logout{
+	font-size: 20px;
+	color: white;
+}
 
+.home{
+	font-size: 20px;
+	color: white;
+}
+
+.navbar-brand{
+	font-size: 24px;
+	color: white;
+}
 /*
  ____            _        _                            _
 | __ )  __ _ ___(_) ___  | |    __ _ _   _  ___  _   _| |_
