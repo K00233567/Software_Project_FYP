@@ -170,9 +170,5 @@
 <script src="JS/bootstrap.min.js"></script>
 <script src="JS/myJS.js"></script>
 
-
-
-
-
   </body>
 </html>
