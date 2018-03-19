@@ -342,11 +342,51 @@ form.BusinessSearch button:hover {
 }
 
 /* Clear floats */
-form.BusinessSearch::after {
+form.BusinessSearch:after {
   content: "";
   clear: both;
   display: table;
 }
+
+/* Style the search field */
+form.SearchBar_SearchPage input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  width: 40%;
+  background: #f1f1f1;
+}
+
+
+
+/* Style the submit button */
+form.SearchBar_SearchPage button {
+  width: 20%;
+	margin-top: 4.5px;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.SearchBar_SearchPage button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.SearchBar_SearchPage:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.SearchBar{
+	text-align: center;
+}
+
 
 /*Category Thumbnails*/
 .post-content {
