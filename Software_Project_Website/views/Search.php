@@ -29,8 +29,9 @@
     </nav>
 
 <div class="row">
+
   <div class="jumbotron">
-    <div class="container">
+    <div class="Jumbotron_height">
       <h2>Search for a Business.</h2>
   <div class="col-sm-12">
     <div class="SearchBar">
@@ -41,23 +42,33 @@
 </div>
 </div>
   </div>
-  </div>
+    </div>
 </div><!--END of ROW-->
 
 <div class="row">
-  <div class="col-sm-9">
-    <div class="googleMap" id="googleMap">
-
-
+      <div id="map"></div>
+      <script>
+        function initMap() {
+          var uluru = {lat: 52.674798308010125, lng: -8.648500465525103};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru
+          });
+          var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+          });
+        }
+      </script>
     </div>
   </div>
-</div>
+
 
 
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBUkohgKOWbDL6w8g3orL7cQsn3gELOb0&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap"></script>
 <script src="../JS/myJS.js"></script>
   </body>
 </html>
