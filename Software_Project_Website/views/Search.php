@@ -28,6 +28,8 @@
 
     </nav>
 
+
+
 <div class="row">
 
   <div class="jumbotron">
@@ -45,8 +47,101 @@
     </div>
 </div><!--END of ROW-->
 
-<div class="row">
-      <div id="map"></div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="Filter_Panel">
+        <div id="accordion" class="panel panel-info">
+        				<div class="panel-heading">
+        					<h3 class="panel-title">Search Filter</h3>
+        				</div>
+        				<div class="panel-body" >
+        					<div class="panel-heading " >
+        						<h4 class="panel-title">
+        							<a data-toggle="collapse" href="#collapse0">
+        								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Price
+        							</a>
+        						</h4>
+        					</div>
+        					<div id="collapse0" class="panel-collapse collapse in" >
+        						<ul class="list-group">
+        							<li class="list-group-item">
+        								<div class="checkbox">
+        									<label>
+        										<input type="checkbox" value="">
+        										€0 - €100
+        									</label>
+        								</div>
+        							</li>
+        							<li class="list-group-item">
+        								<div class="checkbox" >
+        									<label>
+        										<input type="checkbox" value="">
+        										€100 - €500
+        									</label>
+        								</div>
+        							</li>
+        							<li class="list-group-item">
+        								<div class="checkbox"  >
+        									<label>
+        										<input type="checkbox" value="">
+        										More Than €1000
+        									</label>
+        								</div>
+        							</li>
+        						</ul>
+        					</div>
+
+        					<div class="panel-heading " >
+        						<h4 class="panel-title">
+        							<a data-toggle="collapse" href="#collapse1">
+        								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Distance
+        							</a>
+        						</h4>
+        					</div>
+        					<div id="collapse1" class="panel-collapse collapse in" >
+        						<ul class="list-group">
+        							<li class="list-group-item">
+        								<div class="checkbox">
+        									<label>
+        										<input type="checkbox" value="">
+        										25km
+        									</label>
+        								</div>
+        							</li>
+        							<li class="list-group-item">
+        								<div class="checkbox" >
+        									<label>
+        										<input type="checkbox" value="">
+        										50km
+        									</label>
+        								</div>
+        							</li>
+        							<li class="list-group-item">
+        								<div class="checkbox"  >
+        									<label>
+        										<input type="checkbox" value="">
+        										100km
+        									</label>
+        								</div>
+        							</li>
+        						</ul>
+        					</div>
+        				</div>
+        			</div>
+  </div>
+</div>
+
+
+<!--GOOGLE MAP-->
+    <div class="col-sm-8">
+    <div id="map">
+  </div>
+</div>
+</div>
+
+
+
+
       <script>
         function initMap() {
           var uluru = {lat: 52.674798308010125, lng: -8.648500465525103};
@@ -60,11 +155,6 @@
           });
         }
       </script>
-    </div>
-  </div>
-
-
-
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

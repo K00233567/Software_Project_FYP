@@ -89,89 +89,14 @@ echo '<h4>Tidy Up!</h4>';
 //end of database operations
 $db->close();
 echo 'Database connection closed<br>';
-
-
-
-
 ?>
-<nav class="navbar navbar-default navbar-fixed-top ">
-
-  <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-     <a class="navbar-brand" href="#">Relics Of Time</a>
-   </div> <!--end of navbar-header-->
-
-   <div class= "collapse navbar-collapse" id="myNavbar">
-     <ul class="nav navbar-nav">
-
-       <li class ="active"><a href="#">Home</a></li>
-       <li class ="dropdown">
-         <a class = "dropdown-toggle" data-toggle="dropdown" href="#">Shop Online<span class="caret"></span></a>
-         <ul class="dropdown-menu">
-           <li><a href="ClocksAndWatches.html">Clocks & Watches</a></li>
-           <li><a href="IrishCollectables.html">Irish Collectables</a></li>
-         </ul>
-       </li>
-       <li><a href="Restoration.html">Restoration</a></li>
-       <li><a href="Auctions.html">Auctions</a></li>
-       <li><a href="ContactUs.html">Contact Us</a></li>
-       <li><a href="Checkout.html" class="shoppingCart">Checkout<i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-     </ul>
-   </div> <!--end of collapse-->
- </div>
-</nav>
 
 
 
-<header id="header">
-    <div class="container">
-
-      <div id="logo" class="pull-left">
-        <h1>NOA</h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
-      </div>
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="#Login">Login</a></li>
-        </ul>
-      </nav><!-- #nav-menu-container -->
-    </div>
-  </header><!-- #header -->
-
-<section id="intro">
-
-    <div class="intro-text">
-      <h2>Find The Right Business Near You...</h2>
-      <p> Looking for an easy way to plan an event? This app helps you find all the businesses you need to make that event happen!</p>
-
-    </div>
-    <h3>My Google Maps Demo</h3>
-       <div id="map"></div>
-       <script>
-         function initMap() {
-           var uluru = {lat: -25.363, lng: 131.044};
-           var map = new google.maps.Map(document.getElementById('map'), {
-             zoom: 4,
-             center: uluru
-           });
-           var marker = new google.maps.Marker({
-             position: uluru,
-             map: map
-           });
-         }
-       </script>
-       <script async defer
-       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSdcaIFijmxLfIl1UKyvhcOtY5uMQXQRw&callback=initMap">
-       </script>
 
 
-  </section><!-- #intro -->
+
+
   <script src="JS/jquery.min.js"></script>
   <script src="JS/bootstrap.min.js"></script>
   <script src="JS/myJS.js"></script>
