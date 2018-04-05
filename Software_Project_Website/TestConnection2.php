@@ -23,12 +23,11 @@
       <table>
       <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
       <tr><td>Address:</td> <td><input type='text' id='address'/> </td> </tr>
-      <tr><td>Price:</td> <td><input type='number' id='price'/> </td> </tr>
       <tr><td>Type:</td> <td><select id='type'> +
-                 <option value='bar' SELECTED>Hotel</option>
-                 <option value='restaurant'>Bakery</option>
-                 <option value='restaurant'>Barber</option>
+                 <option value='bar' SELECTED>bar</option>
+                 <option value='restaurant'>restaurant</option>
                  </select> </td></tr>
+      <tr><td>Email:</td> <td><input type='text' id='email'/> </td> </tr>
                  <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
       </table>
     </div>
@@ -40,9 +39,9 @@
       var messagewindow;
 
       function initMap() {
-        var Limerick = {lat: 52.674798308010125, lng: -8.648500465525103};
+        var california = {lat: 37.4419, lng: -122.1419};
         map = new google.maps.Map(document.getElementById('map'), {
-          center: Limerick,
+          center: california,
           zoom: 13
         });
 
@@ -72,8 +71,9 @@
         var address = escape(document.getElementById('address').value);
         var type = document.getElementById('type').value;
         var latlng = marker.getPosition();
-        var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
-                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+        var email = document.getElementById('email').value;
+        var url = 'TestConnection2.phpname=' + name + '&address=' + address +
+                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&email' + email;
 
         downloadUrl(url, function(data, responseCode) {
 
@@ -107,6 +107,49 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
     </script>
+
+    <?php
+
+// Gets data from URL parameters.
+$name = $_GET['name'];
+$address = $_GET['address'];
+$lat = $_GET['lat'];
+$lng = $_GET['lng'];
+$type = $_GET['type'];
+$email = $_GET['email'];
+
+// Opens a connection to a MySQL server.
+$connect = mysqli_connect('localhost','root','','event_management_system');
+
+//mysqli_query($connect,"INSERT INTO business(nameB,address,lat,lng,type, emailB)VALUES('$name','$address','$lat','$lng', '$type', '$email')");
+
+//if(mysqli_affected_rows($connect) >0){
+//  echo "Welcome, you have now created an account.";
+//}
+//else {
+  //echo "Sorry, an error has occurred please try again.  <br>";
+  //echo mysqli_error($connect);
+//}
+
+
+//Inserts new row with place data.
+$query = sprintf("INSERT INTO business " .
+         " (nameB, address, lat, lng, type ) " .
+        " VALUES ( '%s', '%s', '%s', '%s', '%s' , '%s');",
+         mysql_real_escape_string($name),
+         mysql_real_escape_string($address),
+         mysql_real_escape_string($lat),
+         mysql_real_escape_string($lng),
+         mysql_real_escape_string($type),
+         mysql_real_escape_string($email));
+
+$result = mysqli_query($query);
+
+if (!$result) {
+  die('Invalid query: ' . mysql_error());
+}
+
+?>
 
     <script src="JS/jquery.min.js"></script>
     <script src="JS/bootstrap.min.js"></script>

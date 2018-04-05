@@ -1,104 +1,159 @@
 <?php
 include ('CONFIG/connection.php');
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
     <head>
-        <title>PHP</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./CSS/bootstrap.min.css">
-        <link rel="stylesheet" href="./CSS/Style.css">
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+ <title>From Info Windows to a Database: Saving User-Added Form Data</title>
+ <style>
+   /* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
+   #map {
+     height: 100%;
+   }
+   /* Optional: Makes the sample page fill the window. */
+   html, body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+   }
+ </style>
     </head>
     <body>
-    <div><h1>This is a Test Page</h1>
+      <div id="map" height="460px" width="100%"></div>
+      <form class="" action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+        <div id="form">
+          <table>
+          <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
+          <tr><td>Address:</td> <td><input type='text' id='address'/> </td> </tr>
+          <tr><td>Type:</td> <td><select id='type'> +
+                     <option value='bar' SELECTED>bar</option>
+                     <option value='restaurant'>restaurant</option>
+                     </select> </td></tr>
+                     <tr><td></td><td><input type='button' value='Save' name = 'map_details' onclick='saveData()' /></td></tr>
+          </table>
+        </div>
+        </form>
 
-<?php
-echo '<h3>Connect to MySQL Server and database</h3>';
 
-//connect using object oriented method - use MySQLi class
-//MySQLi class : http://php.net/manual/en/class.mysqli.php
-@$db=new mysqli($DBServer, $DBUser, $DBPass, $DBName); //try to connect to the MySQL server
 
-echo '<hr>';
-echo '<h4>Connect to MySQL Server</h4>';
-if($db->connect_errno){
-    //if DEBUG is enabled display diagnostics
-    if (__DEBUG==1){
-        echo '<h3>DIAGNOSTIC DATA - Unable to connect to MySQL Server</h3>';
-        echo 'MySQL Server Connection parameters attempted:<br>';
-        echo 'Host address :'.$DBServer.'<br>';
-        echo 'Username : '.$DBUser.'<br>';
-        echo 'Password : '.$DBPass.'<br>';
-        echo 'Selected Database : '.$DBName.'<br>';
-        echo '<h4>MySQLi error message:</h4>';
-        echo $db->connect_error;
-        $db->close();
-        exit ('<hr>Script terminated');
+
+
+
+        <script>
+          var map;
+          var marker;
+          var infowindow;
+          var messagewindow;
+
+          function initMap() {
+            var california = {lat: 37.4419, lng: -122.1419};
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: california,
+              zoom: 13
+            });
+
+            infowindow = new google.maps.InfoWindow({
+              content: document.getElementById('form')
+            });
+
+            messagewindow = new google.maps.InfoWindow({
+              content: document.getElementById('message')
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+              marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map
+              });
+
+              google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+                var latitude = this.position.lat();
+                var longitude = this.position.lng();
+                alert(this.position);
+              });
+            });
+          }
+
+          function saveData() {
+       var name = escape(document.getElementById('name').value);
+       var address = escape(document.getElementById('address').value);
+       var type = document.getElementById('type').value;
+       var latlng = marker.getPosition();
+       var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
+                 '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+
+       downloadUrl(url, function(data, responseCode) {
+
+         if (responseCode == 200 && data.length <= 1) {
+           infowindow.close();
+           messagewindow.open(map, marker);
+         }
+       });
+     }
+
+     function downloadUrl(url, callback) {
+       var request = window.ActiveXObject ?
+           new ActiveXObject('Microsoft.XMLHTTP') :
+           new XMLHttpRequest;
+
+       request.onreadystatechange = function() {
+         if (request.readyState == 4) {
+           request.onreadystatechange = doNothing;
+           callback(request.responseText, request.status);
+         }
+       };
+
+       request.open('GET', url, true);
+       request.send(null);
+     }
+
+     function doNothing () {
+     }
+
+
+
+        </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
+    </script>
+
+
+    <?php
+
+
+
+    if(isset($_POST['map_details'])){
+    $name = $_GET['name'];
+    $address = $_GET['address'];
+    $lat = $_GET['lat'];
+    $lng = $_GET['lng'];
+    $type = $_GET['type'];
+    $connect = mysqli_connect('localhost','root','','event_management_system');
+
+
+    // Inserts new row with place data.
+
+    mysqli_query($connect,"INSERT INTO business(nameB,address,lat,lng,type)VALUES('$name','$address','$lat','$lng', '$type')");
+
+    if(mysqli_affected_rows($connect) >0){
+      echo "Welcome, you have now created an account.";
     }
-    else{
-        echo 'System Error - no debug information available';
-        $db->close();
-        exit ('<hr>Script terminated');
-        }
-        }
-else{
-        echo 'Server & database connection successful<br>';
+    else {
+      echo "Sorry, an error has occurred please try again.  <br>";
+      echo mysqli_error($connect);
     }
 
-echo '<h4>Use the connection to MySQL Server</h4>';
-//use the connection
-//display connection parameters
-echo '<h5>MySQLi Server Connection Object information :</h5>';
-echo "Client connection info  string :  $db->client_info <br>";
-echo "Server Version   [as decimal release]:  $db->server_info <br>";
-echo "Host info :  $db->host_info() <br>";
-$sql = "Select * from customer ";
-
-echo 'SQL = '.$sql.'<br>';
-
-if(@$rs=$db->query($sql)){
-    echo '<br>Query has been Executed<br>';
 }
-else{
-    echo '<br>SQL Query has FAILED - possible problem in the SQL - check for syntax errors<br>';
-    exit ('<hr>Script terminated');
-}
-
-//query results
-echo '<h5>Query Result</h5>';
-//check if any rows returned from query
-if (!$rs->num_rows){
-        echo 'No records have been returned - resultset is empty - Nr Rows = '.$rs->num_rows. '<br>';
-}
-
-
-    //fetch associative array using a WHILE + FOREACH loop
-    echo "<h5>This is an example of writing from the database</h5>";
-    $rs->data_seek(0);  //point to the first row
-    while ($row = $rs->fetch_assoc()) {
-            foreach ($row as $key=>$value){
-                echo $value.' ';
-            }
-            echo '<br>';
-    }
+    ?>
 
 
 
-echo '<h4>Tidy Up!</h4>';
-//end of database operations
-$db->close();
-echo 'Database connection closed<br>';
-?>
-
-
-
-
-
-
-
-  <script src="JS/jquery.min.js"></script>
-  <script src="JS/bootstrap.min.js"></script>
-  <script src="JS/myJS.js"></script>
+    <script src="JS/jquery.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+    <script src="JS/myJS.js"></script>
 </body>
 </html>

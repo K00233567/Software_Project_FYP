@@ -42,7 +42,7 @@
 
     <div id="cSign-Up" class="modal">
       <span onclick="document.getElementById('cSign-Up').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <form class="modal-content" action="<?php echo $_SERVER["PHP_SELF"];?>" method = "post">
+      <form class="modal-content" action="<?php echo 'php/signUp.php';?>" method = "post">
         <div class="container">
           <h1>Customer Sign Up</h1>
           <p>Please fill in this form to create an account.</p>
@@ -66,27 +66,6 @@
     </div> <!--End of modal-->
 
 
-    <?php
-    if(isset($_POST['Customer_Submitted'])){
-    $Name = $_POST['name'];
-    $CustomerEmail = $_POST['email'];
-    $Password = $_POST['psw'];
-    $connect = mysqli_connect('localhost','root','','event_management_system');
-
-    mysqli_query($connect,"INSERT INTO customer(nameC,emailC,pinC)VALUES('$Name','$CustomerEmail','$Password')");
-
-    if(mysqli_affected_rows($connect) >0){
-      echo "Welcome, you have now created an account.";
-    }
-    else {
-      echo "Sorry, an error has occurred please try again.  <br>";
-      echo mysqli_error($connect);
-    }
-
-    }
-     ?>
-
-
 
 <!--BUSINESS SIGN UP BUTTON-->
 
@@ -95,7 +74,7 @@
 
       <div id="bSign-Up" class="modal">
         <span onclick="document.getElementById('bSign-Up').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+        <form class="modal-content" action="<?php echo 'php/signUp.php';?>" method="post">
           <div class="container">
             <h1>Business Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
@@ -120,10 +99,7 @@
             <input type="number" placeholder="Enter Price Estimate" name="price" required><br><br><br>
 
             <label for="bpsw" class="pull-left"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="bpsw" required>
-
-            <label for="description" class="pull-left"><b>Brief description of business</b></label>
-            <input type="text" placeholder="Enter a brief description of your business" name="description" required>
+            <input required type="password" placeholder="Enter Password"  name="bpsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 
             <div class="clearfix">
               <button type="button" onclick="document.getElementById('bSign-Up').style.display='none'" class="cancelbtn">Cancel</button>
@@ -132,34 +108,6 @@
           </div>
         </form>
       </div> <!--End of modal-->
-
-      <?php
-      if(isset($_POST['Business_Submitted'])){
-      $BusinessName = $_POST['bname'];
-      $Btype = $_POST['btype'];
-      $BEmail = $_POST['bemail'];
-      $Telephone = $_POST['telephone'];
-      $StAddress= $_POST['stAddress'];
-      $Price= $_POST['price'];
-      $PasswordB= $_POST['bpsw'];
-      $Description= $_POST['description'];
-
-      $connect = mysqli_connect('localhost','root','','event_management_system');
-
-      mysqli_query($connect,"INSERT INTO business(nameB,type,emailB,telephone,address,price,pinB,description)VALUES('$BusinessName','$Btype','$BEmail','$Telephone','$StAddress','$Price','$PasswordB','$Description')");
-
-      if(mysqli_affected_rows($connect) >0){
-        echo "Welcome, you have now created an account.";
-      }
-      else {
-        echo "Sorry, an error has occurred please try again.  <br>";
-        echo mysqli_error($connect);
-      }
-
-      }
-       ?>
-
-
       </div>
     </div>
 
