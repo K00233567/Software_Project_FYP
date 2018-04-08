@@ -211,6 +211,12 @@ ul.navbar-nav{
 	color: white;
 }
 
+.Name{
+	font-size: 20px;
+	color: white;
+	margin-top: 11px;
+}
+
 .navbar-brand{
 	font-size: 24px;
 	color: white;

@@ -22,7 +22,7 @@
          <ul class="nav navbar-nav">
 
            <li class ="active"><a href="#" class="home">Home</a></li>
-           <li><a href="#Logout" class="Logout">Logout</a></li>
+           <li><a href="../php/Customer_signout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 
@@ -50,9 +50,24 @@
 
       </div>
     </div> <!--END OF COL-->
-  </div> <!--END OF ROW-->
 
 
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h1 class="display-1"style="text-align:center;">Event Total</h1>
+      </div>
+
+      <div class="panel-body">
+          <p class="lead" style="text-align:center;">Here is a price estimate of your event!</p>
+      </div>
+
+
+
+  </div>
+</div> <!--END OF COL-->
+</div> <!--END OF ROW-->
 
 
 

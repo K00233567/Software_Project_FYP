@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php
+session_start();
+// if($_SESSION['Login']===1){
+//   if($_SESSION['usertype']==='User'){
+//     header('Location: ../views/CustomerHome.php');
+// }
+// else if($_SESSION['usertype']==='Admin'){
+//     header('Location: ../admin.php');
+//       }
+//     }
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,14 +26,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-         <a class="navbar-brand" href="#">NOA</a>
+         <a class="navbar-brand" href="#">NOA |</a>
+         <ul class="nav navbar-nav">
+             <!-- <li href="#" class="Name">Hello <?php echo $_SESSION['name']; ?> </li> -->
+         </ul>
+
        </div> <!--end of navbar-header-->
 
        <div class= "collapse navbar-collapse" id="myNavbar">
          <ul class="nav navbar-nav">
 
            <li class ="active"><a href="#" class="home">Home</a></li>
-           <li><a href="#Logout" class="Logout">Logout</a></li>
+           <li><a href="../php/Customer_signout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 
