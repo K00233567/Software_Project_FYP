@@ -6,6 +6,7 @@ include ('CONFIG/connection.php');
     <head>
       <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+ <link rel="stylesheet" href="./CSS/bootstrap.min.css">
  <title>From Info Windows to a Database: Saving User-Added Form Data</title>
  <style>
    /* Always set the map height explicitly to define the size of the div
@@ -149,8 +150,6 @@ include ('CONFIG/connection.php');
 
 }
     ?>
-
-
 
     <script src="JS/jquery.min.js"></script>
     <script src="JS/bootstrap.min.js"></script>

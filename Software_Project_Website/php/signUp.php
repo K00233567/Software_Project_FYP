@@ -1,44 +1,66 @@
 <?php
-//Customer signUp
+session_start();
+require("../CONFIG/connection.php");
+
+
+//CUSTOMER SIGN-UP
 if(isset($_POST['Customer_Submitted'])){
 $Name = $_POST['name'];
-$CustomerEmail = $_POST['email'];
+$CustomerEmail =$_POST['email'];
 $Password = $_POST['psw'];
-$connect = mysqli_connect('localhost','root','','event_management_system');
+$passEncrypt = hash('ripemd160', $Password);  //Encrypting password for security
+$UserType = 'User';
 
-mysqli_query($connect,"INSERT INTO customer(nameC,emailC,pinC)VALUES('$Name','$CustomerEmail','$Password')");
 
-if(mysqli_affected_rows($connect) >0){
-  echo "Welcome, you have now created an account.";
+$connection=mysqli_connect ('localhost', $username, $password);
+if (!$connection) {  die('Not connected : ' . mysql_error());}
+
+// Set the active MySQL database
+$db_selected = mysqli_select_db( $connection,$database);
+if (!$db_selected) {
+die ('Can\'t use db : ' . mysqli_error($connection));
 }
-else {
-  echo "Sorry, an error has occurred please try again.  <br>";
-  echo mysqli_error($connect);
+
+//Inserting Customer details into database
+$query = "INSERT INTO customer(nameC,emailC,pinC,UserType)VALUES('$Name','$CustomerEmail','$passEncrypt','$UserType')";
+
+$result = mysqli_query($connection,$query);
+if (!$result) {
+die('Invalid query: ' . mysqli_error($connection));
 }
 
+header('Location: ../index.php?signup=success');
 }
 
-//Business signUp
+
+
+//BUSINESS SIGN-UP
 if(isset($_POST['Business_Submitted'])){
-$BusinessName = $_POST['bname'];
-$Btype = $_POST['btype'];
+$BusinessName =$_POST['bname'];
 $BEmail = $_POST['bemail'];
-$Telephone = $_POST['telephone'];
-$StAddress= $_POST['stAddress'];
-$Price= $_POST['price'];
-$PasswordB= $_POST['bpsw'];
+$PasswordB= $_POST['bpsw']  ;
+$BpassEncrypt = hash('ripemd160', $PasswordB);
+$UserType = 'User';
 
-$connect = mysqli_connect('localhost','root','','event_management_system');
+$connection=mysqli_connect ('localhost', $username, $password);
+if (!$connection) {  die('Not connected : ' . mysql_error());}
 
-mysqli_query($connect,"INSERT INTO business(nameB,type,emailB,telephone,address,price,pinB)VALUES('$BusinessName','$Btype','$BEmail','$Telephone','$StAddress','$Price','$PasswordB')");
+// Set the active MySQL database
 
-if(mysqli_affected_rows($connect) >0){
-  echo "Welcome, you have now created an account.";
+$db_selected = mysqli_select_db( $connection,$database);
+if (!$db_selected) {
+die ('Can\'t use db : ' . mysqli_error($connection));
 }
-else {
-  echo "Sorry, an error has occurred please try again.  <br>";
-  echo mysqli_error($connect);
+
+//Inserting Business details into database
+$query = "INSERT INTO business(nameB,emailB,pinB,Usertype)VALUES('$BusinessName','$BEmail','$BpassEncrypt','$UserType')"; //Encrypting password for security
+
+$result = mysqli_query($connection,$query);
+if (!$result) {
+die('Invalid query: ' . mysqli_error($connection));
 }
+
+header('Location: ../index.php');
 
 }
  ?>

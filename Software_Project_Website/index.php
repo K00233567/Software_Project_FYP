@@ -1,3 +1,4 @@
+<?php session_start();    ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +19,8 @@
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
-                <li><a href="views/CustomerHome.html">Login</a></li>
+                <a href="#SignInModal" data-toggle='modal'>Customer Login</a>
+                <a href="#BSignInModal" data-toggle='modal'>| Business Login</a>
               </ul>
             </nav><!-- #nav-menu-container -->
           </div>
@@ -36,83 +38,164 @@
 
 <!--CUSTOMER SIGN UP BUTTON-->
 <div class="row">
+  <div class="col-sm-6">
 
+    <button href='#cSign-up-Modal' id="cSign-up-button"  class="btn btn-primary btn-lg" type="button" data-toggle='modal'>Customer Sign-Up</button>
 
-    <button onclick="document.getElementById('cSign-Up').style.display='block'" id="cSign-up-button"  class="btn btn-primary btn-lg" type="button">Customer Sign-Up</button>
+    <!--CUSTOMER SIGN UP MODAL-->
+    <div id="cSign-up-Modal" class="modal fade">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <h4 class="modal-title">Customer Sign-Up</h4>
+            </div>
+            <div class="modal-body">
+      <form class="form" id= 'csignup'action="<?php echo 'php/signUp.php';?>" method="post">
 
-    <div id="cSign-Up" class="modal">
-      <span onclick="document.getElementById('cSign-Up').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <form class="modal-content" action="<?php echo 'php/signUp.php';?>" method = "post">
-        <div class="container">
-          <h1>Customer Sign Up</h1>
-          <p>Please fill in this form to create an account.</p>
-          <hr>
-
+        <div class="form-group">
           <label for="name" class="pull-left"><b>Name</b></label>
           <input type="text" placeholder="Enter Name" name="name" required>
+        </div>
 
+        <div class="form-group">
           <label for="email" class="pull-left"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" required>
+        </div>
 
+          <div class="form-group">
           <label for="psw" class="pull-left"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <input type="password" placeholder="Enter Password" id= 'CPassword'  name="psw" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters">
+        </div>
 
-          <div class="clearfix">
-            <button type="button" onclick="document.getElementById('cSign-Up').style.display='none'" class="cancelbtn">Cancel</button>
-            <input type="submit" class="signupbtn" name="Customer_Submitted">
-          </div>
+        <div class="form-group">
+         <label for="bpsw" class="pull-left"><b>Confirm Password</b></label>
+         <input required type="password" placeholder="Confirm Password"  id='CpasswordConfirm' class="form-control">
+       </div>
+
+
+
+        <button class="btn btn-primary btn-lg" name ="Customer_Submitted">Sign-Up</button>
+        <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
         </div>
       </form>
     </div> <!--End of modal-->
+    </div>
+    </div>
+    </div>
 
 
 
 <!--BUSINESS SIGN UP BUTTON-->
+<div class="col-sm-6">
 
+      <button href='#bSign-Up-Modal' id="bSign-up-button"  class="btn btn-danger btn-lg" type="button" data-toggle='modal'>Business Sign-Up</button>
+</div>
 
-      <button onclick="document.getElementById('bSign-Up').style.display='block'" id="bSign-up-button"  class="btn btn-danger btn-lg" type="button">Business Sign-Up</button>
-
-      <div id="bSign-Up" class="modal">
-        <span onclick="document.getElementById('bSign-Up').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="<?php echo 'php/signUp.php';?>" method="post">
-          <div class="container">
-            <h1>Business Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
-
+  <!--BUSINESS SIGN UP MODAL-->
+      <div id="bSign-Up-Modal" class="modal fade">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Business Sign-Up</h4>
+              </div>
+              <div class="modal-body">
+        <form class="form" id='signup' action="<?php echo 'php/signUp.php';?>" method="post">
+             <div class="form-group">
             <label for="bname" class="pull-left"><b>Business Name</b></label>
-            <input type="text" placeholder="Enter Business Name" name="bname" required>
-
-            <label for="btype" class="pull-left"><b>Business Type</b></label>
-            <input type="text" placeholder="Enter Business Type" name="btype" required>
-
-            <label for="bemail" class="pull-left"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="bemail" required>
-
-            <label for="telephone" class="pull-left"><b>Telephone</b></label>
-            <input type="number" placeholder="Enter Telephone" name="telephone" required><br><br><br>
-
-            <label for="stAddress" class="pull-left"><b>Street Address</b></label>
-            <input type="text" placeholder="Enter Street Address" name="stAddress" required>
-
-            <label for="price" class="pull-left"><b>Price Estimate of Product/Service</b></label>
-            <input type="number" placeholder="Enter Price Estimate" name="price" required><br><br><br>
-
-            <label for="bpsw" class="pull-left"><b>Password</b></label>
-            <input required type="password" placeholder="Enter Password"  name="bpsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-
-            <div class="clearfix">
-              <button type="button" onclick="document.getElementById('bSign-Up').style.display='none'" class="cancelbtn">Cancel</button>
-            <input type="submit" class="signupbtn" name="Business_Submitted">
-            </div>
+            <input type="text" placeholder="Enter Business Name" name="bname" class="form-control" required>
           </div>
+
+             <div class="form-group">
+            <label for="bemail" class="pull-left"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="bemail" class="form-control" required>
+          </div>
+
+           <div class="form-group">
+            <label for="bpsw" class="pull-left"><b>Password</b></label>
+            <input required type="password" placeholder="Enter Password" id='Password'  name="bpsw" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+          </div>
+
+          <div class="form-group">
+           <label for="bpsw" class="pull-left"><b>Confirm Password</b></label>
+           <input required type="password" placeholder="Confirm Password"  id='passwordConfirm' class="form-control">
+         </div>
+
+          <button class="btn btn-primary btn-lg" name ="Business_Submitted">Sign-Up</button>
+          <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
         </form>
       </div> <!--End of modal-->
       </div>
     </div>
+  </div>
+
 
 </section><!-- #intro -->
 
+
+<!-- Customer Login Modal -->
+<div id="SignInModal" class="modal fade">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Customer Login</h4>
+               </div>
+               <div class="modal-body">
+                  <form class="form" method="post" autocomplete="off"  action ="<?php echo './php/Customer_Login.php';?>">
+
+                      <div class="form-group">
+                        <label for="email" class="pull-left"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                      </div>
+
+                      <div class="form-group">
+                      <label for="psw" class="pull-left"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                    </div>
+
+                     <button class="btn btn-primary btn-lg" name ="CLogin">Sign In</button>
+                     <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Business Login Modal -->
+      <div id="BSignInModal" class="modal fade">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Business Login</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form class="form" method="post" autocomplete="off"  action ="<?php echo 'php/Business_Login.php';?>">
+
+                            <div class="form-group">
+                           <label for="bemail" class="pull-left"><b>Email</b></label>
+                           <input type="text" placeholder="Enter Email" name="bemail" class="form-control" required>
+                         </div>
+
+                         <div class="form-group">
+                          <label for="bpsw" class="pull-left"><b>Password</b></label>
+                          <input required type="password" placeholder="Enter Password"  name="bpsw" class="form-control">
+                        </div>
+                           <button class="btn btn-primary btn-lg" name ="BLogin">Sign In</button>
+                           <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+
+            <script>
+
+            </script>
 
 <script src="JS/jquery.min.js"></script>
 <script src="JS/bootstrap.min.js"></script>
