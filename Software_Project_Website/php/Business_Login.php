@@ -48,7 +48,7 @@ $loggedIn = "SELECT LoggedIn FROM business WHERE emailB = '$BusinessEmail'";
     exit();
   }
   else {
-    $login = "UPDATE business SET LoggedIn = 1 WHERE emailB = '$BusinessEmail'";  //updates database to say user is logged in
+    $login = "CALL business_logged_in('$BusinessEmail')";  //updates database to say user is logged in
     mysqli_query($connection,$login);
 
     $_SESSION['usertype'] = $row['Usertype']; //sets session variable for usertype

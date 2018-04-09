@@ -108,18 +108,18 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
     </script>
 
-    <?php
 
-// Gets data from URL parameters.
-$name = $_GET['name'];
-$address = $_GET['address'];
-$lat = $_GET['lat'];
-$lng = $_GET['lng'];
-$type = $_GET['type'];
-$email = $_GET['email'];
 
-// Opens a connection to a MySQL server.
-$connect = mysqli_connect('localhost','root','','event_management_system');
+<!-- // Gets data from URL parameters.
+// $name = $_GET['name'];
+// $address = $_GET['address'];
+// $lat = $_GET['lat'];
+// $lng = $_GET['lng'];
+// $type = $_GET['type'];
+// $email = $_GET['email'];
+//
+// // Opens a connection to a MySQL server.
+// $connect = mysqli_connect('localhost','root','','event_management_system');
 
 //mysqli_query($connect,"INSERT INTO business(nameB,address,lat,lng,type, emailB)VALUES('$name','$address','$lat','$lng', '$type', '$email')");
 
@@ -133,23 +133,23 @@ $connect = mysqli_connect('localhost','root','','event_management_system');
 
 
 //Inserts new row with place data.
-$query = sprintf("INSERT INTO business " .
-         " (nameB, address, lat, lng, type ) " .
-        " VALUES ( '%s', '%s', '%s', '%s', '%s' , '%s');",
-         mysql_real_escape_string($name),
-         mysql_real_escape_string($address),
-         mysql_real_escape_string($lat),
-         mysql_real_escape_string($lng),
-         mysql_real_escape_string($type),
-         mysql_real_escape_string($email));
+// $query = sprintf("INSERT INTO business " .
+//          " (nameB, address, lat, lng, type ) " .
+//         " VALUES ( '%s', '%s', '%s', '%s', '%s' , '%s');",
+//          mysql_real_escape_string($name),
+//          mysql_real_escape_string($address),
+//          mysql_real_escape_string($lat),
+//          mysql_real_escape_string($lng),
+//          mysql_real_escape_string($type),
+//          mysql_real_escape_string($email));
+//
+// $result = mysqli_query($query);
+//
+// if (!$result) {
+//   die('Invalid query: ' . mysql_error());
+// } -->
 
-$result = mysqli_query($query);
 
-if (!$result) {
-  die('Invalid query: ' . mysql_error());
-}
-
-?>
 
     <script src="JS/jquery.min.js"></script>
     <script src="JS/bootstrap.min.js"></script>

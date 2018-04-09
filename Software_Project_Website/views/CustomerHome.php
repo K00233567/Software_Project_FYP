@@ -1,13 +1,13 @@
 <?php
 session_start();
-// if($_SESSION['Login']===1){
-//   if($_SESSION['usertype']==='User'){
-//     header('Location: ../views/CustomerHome.php');
-// }
-// else if($_SESSION['usertype']==='Admin'){
-//     header('Location: ../admin.php');
-//       }
-//     }
+if($_SESSION['Login']===1){
+  if($_SESSION['usertype']==='User'){
+    header('Location: ../views/CustomerHome.php');
+}
+else if($_SESSION['usertype']==='Admin'){
+    header('Location: ../admin.php');
+      }
+    }
  ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@ session_start();
             </button>
          <a class="navbar-brand" href="#">NOA |</a>
          <ul class="nav navbar-nav">
-             <!-- <li href="#" class="Name">Hello <?php echo $_SESSION['name']; ?> </li> -->
+             <li href="#" class="Name">Hello <?php echo $_SESSION['name']; ?> </li>
          </ul>
 
        </div> <!--end of navbar-header-->
@@ -51,7 +51,7 @@ session_start();
       <p>Throw the perfect event. Find the right business near you.</p>
 
     <!-- Search Bar Form -->
-        <form class="BusinessSearch" action="#action_page.php">
+        <form class="BusinessSearch" action="./Search.php">
           <input type="text" placeholder="Search for a business type eg. Barber, Hotel, Bakery..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
@@ -64,7 +64,7 @@ session_start();
   <div class="col-sm-12">
     <div class="panel panel-default">
       <div class="panel-body" id=CategoryPanel>
-        <h1 class="Categories">Categories</h1>
+        <h1 class="Categories">Event Categories</h1>
       </div>
     </div>
   </div>
@@ -96,7 +96,7 @@ session_start();
   <div class="col-sm-3">
     <div class="thumbnail">
       <div class="imageEffect">
-      <a href="#Birthday.php">
+      <a href="Birthday.php">
       <img src="../Images/BirthdayCategory.jpeg" alt="Image of cupcakes with candles" style="width:100%;">
     </a>
   </div>
@@ -106,7 +106,7 @@ session_start();
 
                   <h3>Birthdays</h3>
                   <p>This Category will help you find businesses relative to planning a Birthday Party.</p>
-                   <p><a href="#Birthdays.php" class="btn btn-default btn-lg" role="button">Explore</a>
+                   <p><a href="Birthday.php" class="btn btn-default btn-lg" role="button">Explore</a>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ session_start();
   <div class="col-sm-3">
     <div class="thumbnail">
       <div class="imageEffect">
-      <a href="#Bacholar.php">
+      <a href="Bacholar.php">
       <img src="../Images/BacholarPartyCategory.jpeg" alt="Image of a bottle lying flat on a wooden table" style="width:100%;">
       </a>
         </div>
@@ -127,7 +127,7 @@ session_start();
 
                   <h3>Bacholar/Bacholarette</h3>
                   <p>This Category will help you find businesses relative to planning a Bacholar/Bacholarette Party.</p>
-                   <p><a href="#Bacholar.php" class="btn btn-default btn-lg" role="button">Explore</a>
+                   <p><a href="Bacholar.php" class="btn btn-default btn-lg" role="button">Explore</a>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ session_start();
   <div class="col-sm-3">
     <div class="thumbnail">
       <div class="imageEffect">
-      <a href="#Anniversary.php">
+      <a href="Corporate.php">
       <img src="../Images/CorporateEvent.jpeg" alt="Image of people wearing formal clothes talking in a function room" style="width:100%;">
     </a>
     </div>
@@ -148,7 +148,7 @@ session_start();
 
                   <h3>Corporate event</h3>
                   <p>This Category will help you find businesses relative to planning a Corporate Event.</p>
-                   <p><a href="#Anniversary.php" class="btn btn-default btn-lg" role="button">Explore</a>
+                   <p><a href="Corporate.php" class="btn btn-default btn-lg" role="button">Explore</a>
               </div>
             </div>
           </div>

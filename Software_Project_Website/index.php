@@ -1,4 +1,6 @@
-<?php session_start();    ?>
+<?php
+session_start();
+  ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -114,7 +116,7 @@
 
            <div class="form-group">
             <label for="bpsw" class="pull-left"><b>Password</b></label>
-            <input required type="password" placeholder="Enter Password" id='Password'  name="bpsw" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <input required type="password" placeholder="Enter Password" id='Password'  name="bpsw" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
           </div>
 
           <div class="form-group">

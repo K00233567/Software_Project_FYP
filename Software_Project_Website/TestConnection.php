@@ -1,7 +1,8 @@
 <?php
 include ('CONFIG/connection.php');
 ?>
-<!DOCTYPE html >
+
+<!DOCTYPE html>
 <html>
     <head>
       <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -24,7 +25,7 @@ include ('CONFIG/connection.php');
     </head>
     <body>
       <div id="map" height="460px" width="100%"></div>
-      <form class="" action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+      <form class="" action="<?php echo'./TestConnectionPHP';?>" method="get">
         <div id="form">
           <table>
           <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
@@ -33,9 +34,10 @@ include ('CONFIG/connection.php');
                      <option value='bar' SELECTED>bar</option>
                      <option value='restaurant'>restaurant</option>
                      </select> </td></tr>
-                     <tr><td></td><td><input type='button' value='Save' name = 'map_details' onclick='saveData()' /></td></tr>
+                     <tr><td></td><td><input type='button' value='Save' onclick='saveData()' /></td></tr>
           </table>
         </div>
+        <div id="message">Location saved</div>
         </form>
 
 
@@ -84,8 +86,8 @@ include ('CONFIG/connection.php');
        var address = escape(document.getElementById('address').value);
        var type = document.getElementById('type').value;
        var latlng = marker.getPosition();
-       var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
-                 '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+       var url = './TestConnection.php?name=' + name + '&address=' + address +
+                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
 
        downloadUrl(url, function(data, responseCode) {
 
@@ -123,36 +125,37 @@ include ('CONFIG/connection.php');
     </script>
 
 
-    <?php
 
 
 
-    if(isset($_POST['map_details'])){
-    $name = $_GET['name'];
-    $address = $_GET['address'];
-    $lat = $_GET['lat'];
-    $lng = $_GET['lng'];
-    $type = $_GET['type'];
-    $connect = mysqli_connect('localhost','root','','event_management_system');
+
+
+    <!-- // $name = $_GET['name'];
+    // $address = $_GET['address'];
+    // $lat = $_GET['lat'];
+    // $lng = $_GET['lng'];
+    // $type = $_GET['type'];
+    // $connect = mysqli_connect('localhost','root','','event_management_system');
 
 
     // Inserts new row with place data.
+// UPDATE business SET address= '$address',type= '$type',lat='$lat',lng= '$lng'  WHERE emailB = 'Nathan@gmail.com'");
+    // mysqli_query($connect,"UPDATE business SET address= '$address',type= '$type',lat='$lat',lng= '$lng'  WHERE emailB = 'Nathan@gmail.com'");
+    //
+    // if(mysqli_affected_rows($connect) >0){
+    //   echo "Welcome, you have now created an account.";
+    // }
+    // else {
+    //   echo "Sorry, an error has occurred please try again.  <br>";
+    //   echo mysqli_error($connect);
+    // }
 
-    mysqli_query($connect,"INSERT INTO business(nameB,address,lat,lng,type)VALUES('$name','$address','$lat','$lng', '$type')");
 
-    if(mysqli_affected_rows($connect) >0){
-      echo "Welcome, you have now created an account.";
-    }
-    else {
-      echo "Sorry, an error has occurred please try again.  <br>";
-      echo mysqli_error($connect);
-    }
+    // ?> -->
 
-}
-    ?>
+    <script src="./JS/jquery.min.js"></script>
+    <script src="./JS/bootstrap.min.js"></script>
+    <script src="./JS/myJS.js"></script>
 
-    <script src="JS/jquery.min.js"></script>
-    <script src="JS/bootstrap.min.js"></script>
-    <script src="JS/myJS.js"></script>
 </body>
 </html>

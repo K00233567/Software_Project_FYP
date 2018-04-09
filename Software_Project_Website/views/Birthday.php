@@ -17,7 +17,7 @@
             </button>
          <a class="navbar-brand" href="./CustomerHome.php">NOA</a>
        </div> <!--end of navbar-header-->
-       <div class="weddingColour">
+       <div class="birthdayColour">
        <div class= "collapse navbar-collapse" id="myNavbar">
          <ul class="nav navbar-nav">
 
@@ -28,14 +28,14 @@
        </div>
     </nav>
 
-<section id='WeddingImage'>
+<section id='BirthdayImage'>
 
 
 <!--TO-DO LIST PANEL-->
     <div class="row">
       <div class="col-sm-6">
         <div class="panel panel-default">
-          <div class="weddingColour">
+          <div class="birthdayColour">
           <div class="panel-heading">
               <h1 class="display-1"style="text-align:center;">To-do List</h1>
           </div>
@@ -60,7 +60,7 @@
 
   <div class="col-sm-6">
     <div class="panel panel-default">
-      <div Class="weddingColour">
+      <div class="birthdayColour">
       <div class="panel-heading">
           <h1 class="display-1"style="text-align:center;">Event Total</h1>
       </div>

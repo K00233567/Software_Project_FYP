@@ -201,6 +201,14 @@ ul.navbar-nav{
 	float: right;
 }
 
+/* .navbar{
+	margin-bottom: 0;
+} */
+
+#navbarMargin{
+	margin-bottom: -1px;
+}
+
 .Logout{
 	font-size: 20px;
 	color: white;
@@ -221,6 +229,7 @@ ul.navbar-nav{
 	font-size: 24px;
 	color: white;
 }
+
 /*
  ____            _        _                            _
 | __ )  __ _ ___(_) ___  | |    __ _ _   _  ___  _   _| |_
@@ -399,6 +408,14 @@ form.SearchBar_SearchPage:after {
 	text-align: center;
 }
 
+.SearchPageColour{
+	background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.8));
+	background-size: cover;
+	width: 100%;
+	height: 92.5vh;
+	position: relative;
+}
+
 
 /*Category Thumbnails*/
 .post-content {
@@ -449,6 +466,38 @@ form.SearchBar_SearchPage:after {
 	 width:;
  }
 
+#WeddingImage{
+ width: 100%;
+ height: 92.5vh;
+ background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.8)), url("../Images/weddingPage.jpg") center top no-repeat;
+ background-size: cover;
+ position: relative;
+	}
+
+#BirthdayImage{
+ width: 100%;
+ height: 92.5vh;
+ background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.8)), url("../Images/BirthdayImage.jpg") center top no-repeat;
+ background-size: cover;
+ position: relative;
+	}
+
+#BacholarImage{
+ width: 100%;
+ height: 92.5vh;
+ background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.8)), url("../Images/BacholarImage.jpg") center top no-repeat;
+ background-size: cover;
+ position: relative;
+	}
+
+#CorporateImage{
+width: 100%;
+height: 92.5vh;
+background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.8)), url("../Images/CorporateImage.jpg") center top no-repeat;
+background-size: cover;
+position: relative;
+	}
+}
 
 
 /*

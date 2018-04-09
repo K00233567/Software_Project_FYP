@@ -48,7 +48,7 @@ $loggedIn = "SELECT LoggedIn FROM customer WHERE emailC = '$CustomerEmail'";
     exit();
   }
   else {
-    $login = "UPDATE customer SET LoggedIn = 1 WHERE emailC = '$CustomerEmail'";  //updates database to say user is logged in
+    $login = "CALL customer_logged_in('$CustomerEmail')";  //updates database to say user is logged in
     mysqli_query($connection,$login);
 
     $_SESSION['name'] = $row['nameC'];

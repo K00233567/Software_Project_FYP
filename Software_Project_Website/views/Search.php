@@ -22,13 +22,15 @@
        <div class= "collapse navbar-collapse" id="myNavbar">
          <ul class="nav navbar-nav">
 
-           <li class ="active"><a href="#" class="home">Home</a></li>
+           <li class ="active"><a href="./CustomerHome.php" class="home">Home</a></li>
            <li><a href="#Logout" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 
     </nav>
 
+
+<section class="SearchPageColour">
 
 
 <div class="row">
@@ -142,7 +144,7 @@
   </div>
 </div>
 </div>
-
+</section>
 <!-- Displaying the businesses on map -->
       <script>
       var customLabel = {
