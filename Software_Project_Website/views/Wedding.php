@@ -49,7 +49,7 @@
               <button type="button" class="list-group-item">Search for a Venue.</button>
               <button type="button" class="list-group-item">Search for Caterer.</button>
               <button type="button" class="list-group-item">Search for Barber/Hairdresser.</button>
-              <button type="button" class="list-group-item">Search for Fluerist.</button>
+              <button type="button" class="list-group-item">Search for Florist.</button>
               <button type="button" class="list-group-item">Search for Baker.</button>
             </div>
 

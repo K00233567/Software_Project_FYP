@@ -104,6 +104,7 @@ $BusinessEmail = $_SESSION['email'];
               infowindow.open(map, marker);
               var latitude = this.position.lat();
               var longitude = this.position.lng();
+              alert(this.position);
             });
           });
         }
@@ -118,7 +119,7 @@ $BusinessEmail = $_SESSION['email'];
      var latlng = marker.getPosition();
      var telephone = document.getElementById('telephone').value;
      var price = document.getElementById('price').value;
-     var url = '../php/business_details.php';
+     var url = '../php/TestConnectionPHP.php';
      var vars= 'address=' + address  + '&lat=' + latlng.lat() + '&lng=' + latlng.lng() +
                '&type=' + type + '&telephone=' + telephone + '&price=' + price;
 
@@ -131,7 +132,7 @@ $BusinessEmail = $_SESSION['email'];
     hr.onreadystatechange = function() {
     if(hr.readyState == 4 && hr.status == 200) {
     var return_data = hr.responseText;
-  document.getElementById("message").innerHTML = return_data;
+document.getElementById("message").innerHTML = return_data;
     }
      };
 
@@ -146,6 +147,35 @@ $BusinessEmail = $_SESSION['email'];
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
     </script>
+
+
+    <?php
+
+
+    //
+    // if(isset($_POST['map_details'])){
+    // $address = $_GET['address'];
+    // $lat = $_GET['lat'];
+    // $lng = $_GET['lng'];
+    // $type = $_GET['type'];
+    // $telephone = $_GET['telephone'];
+    // $price = $_GET['price'];
+    // $connect = mysqli_connect('localhost','root','','event_management_system');
+    //
+    //
+    // // Inserts new row with place data.
+    // mysqli_query($connect,"UPDATE business SET address= '$address',type= '$type', telephone= '$telephone', price = '$price'  WHERE emailB = '$BusinessEmail'");
+    //
+    // if(mysqli_affected_rows($connect) >0){
+    // echo "Welcome, you have now created an account.";
+    // }
+    // else {
+    // echo "Sorry, an error has occurred please try again.  <br>";
+    // echo mysqli_error($connect);
+    // }
+    //
+    // }
+    ?>
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

@@ -57,7 +57,6 @@ $loggedIn = "SELECT LoggedIn FROM business WHERE emailB = '$BusinessEmail'";
     $_SESSION['name'] = $row['nameB'];
     header('Location: ../index.php?login=succescredentials');
   }
-
 //Checks whether the logged in usertype is a User or Admin
 
 if($_SESSION['usertype']==='User'){
@@ -66,7 +65,7 @@ if($_SESSION['usertype']==='User'){
 else if($_SESSION['usertype']==='Admin'){
     header('Location: ../admin.php');
       }
-  }
+}
 }
 
  ?>

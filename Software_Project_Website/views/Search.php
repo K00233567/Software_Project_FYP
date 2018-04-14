@@ -23,7 +23,7 @@
          <ul class="nav navbar-nav">
 
            <li class ="active"><a href="./CustomerHome.php" class="home">Home</a></li>
-           <li><a href="#Logout" class="Logout">Logout</a></li>
+           <li><a href="../php/Customer_signout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 
@@ -183,6 +183,7 @@
               var strong = document.createElement('strong');
               strong.textContent = name
               infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
               infowincontent.appendChild(document.createElement('br'));
 
               var text = document.createElement('text');

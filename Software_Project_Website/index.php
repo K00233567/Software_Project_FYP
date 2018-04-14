@@ -15,9 +15,8 @@ session_start();
 
       <header id="header">
           <div class="container">
-
             <div id="logo" class="pull-left">
-              <h1>NOA</h1>
+              <a class="LogoStyle"  href="#ASignInModal" data-toggle='modal'>NOA</a>
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
@@ -195,9 +194,35 @@ session_start();
             </div>
 
 
-            <script>
 
-            </script>
+            <!-- Admin Login Modal -->
+            <div id="ASignInModal" class="modal fade">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title">Admin Login</h4>
+                           </div>
+                           <div class="modal-body">
+                              <form class="form" method="post" autocomplete="off"  action ="<?php echo 'php/Admin_Login.php';?>">
+
+                                  <div class="form-group">
+                                 <label for="bemail" class="pull-left"><b>Email</b></label>
+                                 <input type="text" placeholder="Enter Email" name="Aemail" class="form-control" required>
+                               </div>
+
+                               <div class="form-group">
+                                <label for="bpsw" class="pull-left"><b>Password</b></label>
+                                <input required type="password" placeholder="Enter Password"  name="Apsw" class="form-control">
+                              </div>
+                                 <button class="btn btn-primary btn-lg" name ="ALogin">Sign In</button>
+                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
 
 <script src="JS/jquery.min.js"></script>
 <script src="JS/bootstrap.min.js"></script>

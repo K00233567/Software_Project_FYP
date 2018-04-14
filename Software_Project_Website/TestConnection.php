@@ -86,7 +86,7 @@ include ('CONFIG/connection.php');
        var address = escape(document.getElementById('address').value);
        var type = document.getElementById('type').value;
        var latlng = marker.getPosition();
-       var url = './TestConnection.php?name=' + name + '&address=' + address +
+       var url = './TestConnectionPHP.php?name=' + name + '&address=' + address +
                   '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
 
        downloadUrl(url, function(data, responseCode) {

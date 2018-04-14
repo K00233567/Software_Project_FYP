@@ -1,13 +1,13 @@
 <?php
 session_start();
-if($_SESSION['Login']===1){
-  if($_SESSION['usertype']==='User'){
-    header('Location: ../views/CustomerHome.php');
-}
-else if($_SESSION['usertype']==='Admin'){
-    header('Location: ../admin.php');
-      }
-    }
+// if($_SESSION['Login']===1){
+//   header('Location: ../index.php')
+// }
+//  if($_SESSION['usertype']==='Admin'){
+//     header('Location: ../admin.php');
+// }
+
+
  ?>
 <!DOCTYPE html>
 <html>

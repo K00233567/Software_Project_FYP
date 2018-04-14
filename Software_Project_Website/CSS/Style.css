@@ -156,11 +156,15 @@ ul li a{
   float: left;
 }
 
-#header #logo h1 {
+#header #logo {
   font-size: 40px;
   margin: 0px 0 0 0;
   padding: 0;
   text-transform: uppercase;
+}
+
+.LogoStyle{
+	color: white;
 }
 
 .nav-menu, .nav-menu * {
@@ -497,9 +501,11 @@ background: linear-gradient(10deg, rgba(40, 60, 190, 0.3), rgba(29, 200, 205, 0.
 background-size: cover;
 position: relative;
 	}
+
+
+#AddAdmin_Btn{
+	margin-left: 90px;
 }
-
-
 /*
  __  __          _ _          ___                  _
 |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___
