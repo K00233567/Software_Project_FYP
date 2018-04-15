@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php session_start();
+
+// CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
+if($_SESSION['Login']===null){
+  header('Location: ../index.php');
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>

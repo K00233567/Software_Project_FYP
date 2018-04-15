@@ -1,13 +1,10 @@
 <?php
 session_start();
-if($_SESSION['Login']===1){
-if($_SESSION['usertype']==='User'){
-    header('Location: ../views/BusinessHome.php');
+
+// CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
+if($_SESSION['Login']===null){
+  header('Location: ../index.php');
 }
-else if($_SESSION['usertype']==='Admin'){
-    header('Location: ../admin.php');
-      }
-    }
 
 $BusinessEmail = $_SESSION['email'];
 ?>

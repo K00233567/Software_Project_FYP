@@ -2,13 +2,10 @@
 session_start();
 require("../CONFIG/connection.php");
 
-
-// if($_SESSION['Login']===1){
-//   header('Location: ../index.php')
-// }
-//  if($_SESSION['usertype']==='Admin'){
-//     header('Location: ../admin.php');
-// }
+// CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
+if($_SESSION['Login']===null){
+  header('Location: ../index.php');
+}
 
  ?>
 <!DOCTYPE html>

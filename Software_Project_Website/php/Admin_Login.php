@@ -2,6 +2,11 @@
 session_start();
 require("../CONFIG/connection.php");
 
+// CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
+if($_SESSION['Login']===null){
+  header('Location: ../index.php');
+}
+
 if(isset($_POST['ALogin'])){
 $AdminEmail = $_POST['Aemail'];
 $Password = $_POST['Apsw'];
