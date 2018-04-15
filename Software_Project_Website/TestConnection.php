@@ -1,161 +1,113 @@
-<?php
-include ('CONFIG/connection.php');
-?>
-
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
- <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
- <link rel="stylesheet" href="./CSS/bootstrap.min.css">
- <title>From Info Windows to a Database: Saving User-Added Form Data</title>
- <style>
-   /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-   #map {
-     height: 100%;
-   }
-   /* Optional: Makes the sample page fill the window. */
-   html, body {
-     height: 100%;
-     margin: 0;
-     padding: 0;
-   }
- </style>
-    </head>
-    <body>
-      <div id="map" height="460px" width="100%"></div>
-      <form class="" action="<?php echo'./TestConnectionPHP';?>" method="get">
-        <div id="form">
-          <table>
-          <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
-          <tr><td>Address:</td> <td><input type='text' id='address'/> </td> </tr>
-          <tr><td>Type:</td> <td><select id='type'> +
-                     <option value='bar' SELECTED>bar</option>
-                     <option value='restaurant'>restaurant</option>
-                     </select> </td></tr>
-                     <tr><td></td><td><input type='button' value='Save' onclick='saveData()' /></td></tr>
-          </table>
-        </div>
-        <div id="message">Location saved</div>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps JavaScript API v3 Example: Info Window Simple</title>
+<link rel="stylesheet" href="./CSS/bootstrap.min.css">
+<link rel="stylesheet" href="./CSS/jquery-ui.min.css">
+<link rel="stylesheet" href="./CSS/Style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+</head>
+<body>
+  <div id="map">
+
+  </div>
+
+<!--
+<div id="datepicker"></div> -->
+
+<script>
+$( "#datepicker" ).datepicker();
+</script>
+
+  <script>
+
+    function initMap() {
+      var myLatlng = new google.maps.LatLng(52.674419,-8.648215
+);
+      var myOptions = {
+        zoom: 4,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+
+      var map = new google.maps.Map(document.getElementById("map"), myOptions);
+      var contentButton = '<div <button type="button" data-toggle="modal" class="btn btn-primary" href="#cSign-up-Modal">Book</button></div>';
+      var contentString = '<div id="datepicker"><form id="" onsubmit="" action="" method="post"></form></div>';
+
+      var infowindow = new google.maps.InfoWindow({
+          content: contentButton
+
+
+      });
+
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+      });
+
+
+      google.maps.event.addListener(infowindow, 'domready', function() {
+          $('#datepicker').datepicker();
+      });
+    }
+      </script>
+
+      <!--CUSTOMER SIGN UP MODAL-->
+      <div id="cSign-up-Modal" class="modal fade">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Customer Sign-Up</h4>
+              </div>
+              <div class="modal-body">
+        <form class="form" id= 'csignup'action="<?php echo 'php/signUp.php';?>" method="post">
+
+          <div class="form-group">
+            <label for="name" class="pull-left"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="pull-left"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+          </div>
+
+            <div class="form-group">
+            <label for="psw" class="pull-left"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id= 'CPassword'  name="psw" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters">
+          </div>
+
+          <div class="form-group">
+           <label for="bpsw" class="pull-left"><b>Confirm Password</b></label>
+           <input required type="password" placeholder="Confirm Password"  id='CpasswordConfirm' class="form-control">
+         </div>
+
+
+
+          <button class="btn btn-primary btn-lg" name ="Customer_Submitted">Sign-Up</button>
+          <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+          </div>
         </form>
+      </div> <!--End of modal-->
+      </div>
+      </div>
 
-
-
-
-
-
-        <script>
-          var map;
-          var marker;
-          var infowindow;
-          var messagewindow;
-
-          function initMap() {
-            var california = {lat: 37.4419, lng: -122.1419};
-            map = new google.maps.Map(document.getElementById('map'), {
-              center: california,
-              zoom: 13
-            });
-
-            infowindow = new google.maps.InfoWindow({
-              content: document.getElementById('form')
-            });
-
-            messagewindow = new google.maps.InfoWindow({
-              content: document.getElementById('message')
-            });
-
-            google.maps.event.addListener(map, 'click', function(event) {
-              marker = new google.maps.Marker({
-                position: event.latLng,
-                map: map
-              });
-
-              google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, marker);
-                var latitude = this.position.lat();
-                var longitude = this.position.lng();
-                alert(this.position);
-              });
-            });
-          }
-
-          function saveData() {
-       var name = escape(document.getElementById('name').value);
-       var address = escape(document.getElementById('address').value);
-       var type = document.getElementById('type').value;
-       var latlng = marker.getPosition();
-       var url = './TestConnectionPHP.php?name=' + name + '&address=' + address +
-                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
-
-       downloadUrl(url, function(data, responseCode) {
-
-         if (responseCode == 200 && data.length <= 1) {
-           infowindow.close();
-           messagewindow.open(map, marker);
-         }
-       });
-     }
-
-     function downloadUrl(url, callback) {
-       var request = window.ActiveXObject ?
-           new ActiveXObject('Microsoft.XMLHTTP') :
-           new XMLHttpRequest;
-
-       request.onreadystatechange = function() {
-         if (request.readyState == 4) {
-           request.onreadystatechange = doNothing;
-           callback(request.responseText, request.status);
-         }
-       };
-
-       request.open('GET', url, true);
-       request.send(null);
-     }
-
-     function doNothing () {
-     }
-
-
-
-        </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
-    </script>
-
-
-
-
-
-
-
-    <!-- // $name = $_GET['name'];
-    // $address = $_GET['address'];
-    // $lat = $_GET['lat'];
-    // $lng = $_GET['lng'];
-    // $type = $_GET['type'];
-    // $connect = mysqli_connect('localhost','root','','event_management_system');
-
-
-    // Inserts new row with place data.
-// UPDATE business SET address= '$address',type= '$type',lat='$lat',lng= '$lng'  WHERE emailB = 'Nathan@gmail.com'");
-    // mysqli_query($connect,"UPDATE business SET address= '$address',type= '$type',lat='$lat',lng= '$lng'  WHERE emailB = 'Nathan@gmail.com'");
-    //
-    // if(mysqli_affected_rows($connect) >0){
-    //   echo "Welcome, you have now created an account.";
-    // }
-    // else {
-    //   echo "Sorry, an error has occurred please try again.  <br>";
-    //   echo mysqli_error($connect);
-    // }
-
-
-    // ?> -->
-
-    <script src="./JS/jquery.min.js"></script>
-    <script src="./JS/bootstrap.min.js"></script>
-    <script src="./JS/myJS.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap"></script>
+  <script src="./JS/jquery.min.js"></script>
+  <script src="./JS/jquery-ui.min.js"></script>
+  <script src="./JS/bootstrap.min.js"></script>
+  <script src="./JS/myJS.js"></script>
 </body>
 </html>

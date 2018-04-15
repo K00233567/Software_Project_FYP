@@ -44,14 +44,17 @@ $BusinessEmail = $_SESSION['email'];
        </div> <!--end of collapse-->
     </nav>
 
+    <!-- Search Box -->
+<input id="pac-input" class="controls" type="text" placeholder="Search Location">
 
 <!-- Map to enter business details into database -->
     <div id="map" height="460px" width="100%"></div>
     <!-- <form class="" action="" method="post"> -->
       <div id="form">
+        <form class="" >
         <table>
-        <tr><td>Address:</td><td><input type='text' id='address'/> </td> </tr>
-        <tr><td>Telephone:</td><td><input type='text' id='telephone'/> </td> </tr>
+        <tr><td>Address:</td><td><input type='text' id='address' required> </td> </tr>
+        <tr><td>Telephone:</td><td><input type='text' id='telephone' required> </td> </tr>
         <tr><td>Type:</td> <td><select id='type'> +
                    <option value='Bar' SELECTED>Bar</option>
                    <option value='Restaurant'>Restaurant</option>
@@ -66,11 +69,11 @@ $BusinessEmail = $_SESSION['email'];
                             <option value='Suit shop'>Suit shop</option>
                              <option value='Makeup artist'>Makeup artist</option>
                    </select> </td></tr>
-                   <tr><td>Price estimate:</td><td><input type='text' id='price'/> </td> </tr>
-                   <tr><td></td><td><input class="btn btn-primary" type="button"  value='Save' onclick='ajax_post()'  /></td></tr>
+                   <tr><td>Price estimate:</td><td><input type='text' id='price' required> </td> </tr>
+                   <tr><td></td><td><input class="btn btn-primary" type="button"  value='Save' onclick='ajax_post()'  required></td></tr>
         </table>
+          </form>
       </div>
-        <div id="message">Location saved</div>
       <!-- </form> -->
 
       <script>
@@ -79,7 +82,7 @@ $BusinessEmail = $_SESSION['email'];
         var infowindow;
         var messagewindow;
 
-        function initMap() {
+        function initAutocomplete() {
           var Limerick = {lat: 52.674798308010125, lng: -8.648500465525103};
           map = new google.maps.Map(document.getElementById('map'), {
             center: Limerick,
@@ -102,50 +105,112 @@ $BusinessEmail = $_SESSION['email'];
 
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.open(map, marker);
+              document.getElementById('form').style.display = "block";
               var latitude = this.position.lat();
               var longitude = this.position.lng();
             });
           });
+
+
+
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
         }
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
 
-        function ajax_post() {
-          // Create our XMLHttpRequest object
-     var hr = new XMLHttpRequest();
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
 
-       // Creating variables to send to php file
-     var address = escape(document.getElementById('address').value);
-     var type = document.getElementById('type').value;
-     var latlng = marker.getPosition();
-     var telephone = document.getElementById('telephone').value;
-     var price = document.getElementById('price').value;
-     var url = '../php/business_details.php';
-     var vars= 'address=' + address  + '&lat=' + latlng.lat() + '&lng=' + latlng.lng() +
-               '&type=' + type + '&telephone=' + telephone + '&price=' + price;
-
-     hr.open("POST", url, true);
-     // Set content type header information for sending url encoded variables in the request
-     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+}
 
 
-    // Access the onreadystatechange event for the XMLHttpRequest object
-    hr.onreadystatechange = function() {
-    if(hr.readyState == 4 && hr.status == 200) {
-    var return_data = hr.responseText;
-  document.getElementById("message").innerHTML = return_data;
-    }
-     };
+    function ajax_post() {
+      // Create our XMLHttpRequest object
+  var hr = new XMLHttpRequest();
 
-     // Send the data to PHP now... and wait for response to update the status div
-     hr.send(vars); // Actually execute the request
-     document.getElementById("message").innerHTML = "processing...";
-    }
+   // Creating variables to send to php file
+  var address = escape(document.getElementById('address').value);
+  var type = document.getElementById('type').value;
+  var latlng = marker.getPosition();
+  var telephone = document.getElementById('telephone').value;
+  var price = document.getElementById('price').value;
+  var url = '../php/business_details.php';
+  var vars= 'address=' + address  + '&lat=' + latlng.lat() + '&lng=' + latlng.lng() +
+           '&type=' + type + '&telephone=' + telephone + '&price=' + price;
 
+  hr.open("POST", url, true);
+  // Set content type header information for sending url encoded variables in the request
+  hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+  // Access the onreadystatechange event for the XMLHttpRequest object
+  hr.onreadystatechange = function() {
+  if(hr.readyState == 4 && hr.status == 200) {
+  var return_data = hr.responseText;
+  }
+  };
+
+  // Send the data to PHP now... and wait for response to update the status div
+  hr.send(vars); // Actually execute the request
+    infowindow.close();
+    alert("Details Updated!");
+  }
 
 
       </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap">
-    </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&libraries=places&callback=initAutocomplete"
+           async defer></script>
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

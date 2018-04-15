@@ -460,11 +460,7 @@ form.SearchBar_SearchPage:after {
     transform: rotate(1deg);
 }
 
-#map {
-   width: 100%;
-   height: 557px;
-   background-color: grey;
- }
+
 
  .Filter_Panel{
 	 width:;
@@ -506,6 +502,67 @@ position: relative;
 #AddAdmin_Btn{
 	margin-left: 90px;
 }
+
+/* Google Maps  */
+#map {
+   width: 100%;
+   height: 557px;
+   background-color: grey;
+ }
+
+
+/* BUSINESS DETAILS MAP SEARCH BAR */
+.pac-card {
+	margin: 10px 10px 0 0;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	font-family: Roboto;
+}
+
+#pac-container {
+	padding-bottom: 12px;
+	margin-right: 12px;
+}
+
+.pac-controls {
+	display: inline-block;
+	padding: 5px 11px;
+}
+
+.pac-controls label {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
+}
+
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 15px 11px 15px 13px;
+	text-overflow: ellipsis;
+	width: 400px;
+}
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+
+#form{
+    display: none;
+}
+#message{
+    display: none;
+}
+
+
+
 /*
  __  __          _ _          ___                  _
 |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___

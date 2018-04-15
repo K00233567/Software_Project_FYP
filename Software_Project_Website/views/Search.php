@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/jquery-ui.min.css">
     <link rel="stylesheet" href="../CSS/Style.css">
     <title>App</title>
   </head>
@@ -134,6 +135,7 @@
         					</div>
         				</div>
         			</div>
+
   </div>
 </div>
 
@@ -203,6 +205,7 @@
 
 
 
+
               var icon = customLabel[type] || {};
               var marker = new google.maps.Marker({
                 map: map,
@@ -236,9 +239,13 @@
       }
 
       function doNothing() {}
+
+
       </script>
 
+
 <script src="../JS/jquery.min.js"></script>
+<script src="../JS/jquery-ui.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&callback=initMap"></script>
 <script src="../JS/myJS.js"></script>
