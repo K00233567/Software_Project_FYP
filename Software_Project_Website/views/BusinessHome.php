@@ -19,7 +19,7 @@ $BusinessEmail = $_SESSION['email'];
     <title>App</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light" id="navbarMargin" style="background: linear-gradient(to bottom right, #17202a 0%, #e5e8e8 100%);">
+    <nav class="navbar navbar-light bg-light" id="navbarMargin" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
               <span class="icon-bar"></span>
@@ -45,7 +45,7 @@ $BusinessEmail = $_SESSION['email'];
 <input id="pac-input" class="controls" type="text" placeholder="Search Location">
 
 <!-- Map to enter business details into database -->
-    <div id="map" height="460px" width="100%"></div>
+    <div id="map"></div>
     <!-- <form class="" action="" method="post"> -->
       <div id="form">
         <form class="" >
@@ -83,7 +83,7 @@ $BusinessEmail = $_SESSION['email'];
           var Limerick = {lat: 52.674798308010125, lng: -8.648500465525103};
           map = new google.maps.Map(document.getElementById('map'), {
             center: Limerick,
-            zoom: 13
+            zoom: 9
           });
 
           infowindow = new google.maps.InfoWindow({
@@ -98,6 +98,10 @@ $BusinessEmail = $_SESSION['email'];
             marker = new google.maps.Marker({
               position: event.latLng,
               map: map
+
+            });
+            markers.forEach(function(marker) {
+              marker.setMap(null);
             });
 
             google.maps.event.addListener(marker, 'click', function() {

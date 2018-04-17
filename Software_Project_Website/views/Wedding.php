@@ -78,6 +78,18 @@ if($_SESSION['Login']===null){
 
       <div class="panel-body">
           <p class="lead" style="text-align:center;">Here is a price estimate of your event!</p>
+
+          <div>
+            <table class="table">
+              <tr>
+                <th><h3>Business</h3></th><th><h3>Date</h3></th><th><h3>Price</h3></th>
+              </tr>
+
+              <tr>
+                <td>Gleneagle Hotel</td> <td>23/04/2018</td> <td>€ 1,000</td>
+              </tr>
+            </table>
+          </div>
       </div>
 
 

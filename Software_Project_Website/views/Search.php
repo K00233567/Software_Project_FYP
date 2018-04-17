@@ -17,7 +17,7 @@ if($_SESSION['Login']===null){
     <title>App</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light" style="background: linear-gradient(to bottom right, #17202a 0%, #e5e8e8 100%);">
+    <nav class="navbar navbar-light bg-light" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
               <span class="icon-bar"></span>
@@ -183,6 +183,7 @@ if($_SESSION['Login']===null){
               var address = markerElem.getAttribute('address');
               var type = markerElem.getAttribute('type');
               var price = markerElem.getAttribute('price');
+              var telephone = markerElem.getAttribute('telephone');
               var point = new google.maps.LatLng(
                   parseFloat(markerElem.getAttribute('lat')),
                   parseFloat(markerElem.getAttribute('lng')));
@@ -207,6 +208,10 @@ if($_SESSION['Login']===null){
 
               var text = document.createElement('text');
               text.textContent = price
+              infowincontent.appendChild(text);
+
+              var text = document.createElement('text');
+              text.textContent = telephone
               infowincontent.appendChild(text);
 
 

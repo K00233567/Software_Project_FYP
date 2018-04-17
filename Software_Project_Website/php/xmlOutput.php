@@ -1,10 +1,9 @@
 <?php
 
-// Start XML file, create parent node
-
 require("../CONFIG/connection.php");
 // Get parameters from URL
 
+// Start XML file, create parent node
 $dom = new DOMDocument("1.0");
 $node = $dom->createElement("markers");
 $parnode = $dom->appendChild($node);
@@ -21,9 +20,9 @@ if (!$db_selected) {
 die ('Can\'t use db : ' . mysqli_error($connection));
 }
 
-// Select all the rows in the markers table
+// Select all the rows in the business table
 
-$query = "SELECT businessID,nameB,address,lat,lng,type,price FROM business WHERE 1";
+$query = "SELECT businessID,nameB,address,lat,lng,type,price,telephone FROM business WHERE 1";
 $result = mysqli_query($connection,$query);
 if (!$result) {
 die('Invalid query: ' . mysqli_error());
@@ -42,6 +41,7 @@ while ($row = @mysqli_fetch_assoc($result)){
   $newnode->setAttribute("lng", $row['lng']);
   $newnode->setAttribute("type", $row['type']);
   $newnode->setAttribute("price", $row['price']);
+  $newnode->setAttribute("telephone", $row['telephone']);
 
 }
 echo $dom->saveXML();
