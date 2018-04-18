@@ -43,7 +43,7 @@ if($_SESSION['Login']===null){
 
 <!--TO-DO LIST PANEL-->
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-6 push-left">
         <div class="panel panel-default">
           <div class="weddingColour">
           <div class="panel-heading">

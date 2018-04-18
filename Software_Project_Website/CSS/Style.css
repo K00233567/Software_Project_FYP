@@ -26,6 +26,24 @@
 /*--------------------------------------------------------------
 # Modals for sign in buttons
 --------------------------------------------------------------*/
+
+
+@font-face {
+	font-family: AlexBrush;
+src: url(../Fonts/AlexBrush-Regular.ttf);
+}
+
+#indexHeading{
+	font-family: AlexBrush;
+}
+
+
+
+
+
+
+
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;

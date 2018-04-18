@@ -33,8 +33,8 @@ session_start();
 
     <section id="intro">
         <div class="intro-text">
-          <h2>Find The Right Business Near You...</h2>
-          <p> Looking for an easy way to plan an event? This app helps you find all the businesses you need to make that event happen!</p>
+          <h2 id="indexHeading">Find The Right Business Near You...</h2>
+          <p id="#indexHeading"> Looking for an easy way to plan an event? This app helps you find all the businesses you need to make that event happen!</p>
 
 
 <!--CUSTOMER SIGN UP BUTTON-->

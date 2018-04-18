@@ -53,6 +53,8 @@ $loggedIn = "SELECT * FROM customer WHERE emailC = '$CustomerEmail'";
     $login = "CALL customer_logged_in('$CustomerEmail')";  //updates database to say user is logged in
     mysqli_query($connection,$login);
 
+    
+
     $_SESSION['ID'] = $row['customerID'];
     $_SESSION['name'] = $row['nameC'];
     $_SESSION['usertype'] = $row['UserType']; //sets session variable for usertype
