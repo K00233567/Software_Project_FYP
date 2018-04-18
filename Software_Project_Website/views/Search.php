@@ -153,6 +153,34 @@ if($_SESSION['Login']===null){
   </div>
 </div>
 </div>
+<button class="btn btn-danger btn-lg pull-right" id="Book_button" type="button" name="Book" href="#business_Book_Modal" data-toggle='modal'>Book a business</button>
+
+<div id="business_Book_Modal" class="modal fade">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+           <h4 class="modal-title">Book a Business</h4>
+        </div>
+        <div class="modal-body">
+  <form class="form" id='Book' action="<?php echo '../php/business_booking.php';?>" method="post">
+       <div class="form-group">
+      <label for="name" class="pull-left"><b>Business Name</b></label>
+      <input type="text" placeholder="Enter Business Name" name="name" class="form-control" autofocus required>
+    </div>
+
+       <div class="form-group">
+      <label for="date" class="pull-left"><b>Date</b></label>
+      <input type="date" placeholder="Enter Date" name="date" class="form-control" required>
+    </div>
+    <button class="btn btn-primary btn-lg" name ="Book">Book</button>
+    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+ </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
 <!-- Displaying the businesses on map -->
       <script>

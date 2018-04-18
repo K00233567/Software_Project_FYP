@@ -56,7 +56,7 @@ session_start();
 
         <div class="form-group">
           <label for="name" class="pull-left"><b>Name</b></label>
-          <input type="text" placeholder="Enter Name" name="name" required>
+          <input type="text" placeholder="Enter Name" name="name" autofocus required>
         </div>
 
         <div class="form-group">
@@ -105,7 +105,7 @@ session_start();
         <form class="form" id='signup' action="<?php echo 'php/signUp.php';?>" method="post">
              <div class="form-group">
             <label for="bname" class="pull-left"><b>Business Name</b></label>
-            <input type="text" placeholder="Enter Business Name" name="bname" class="form-control" required>
+            <input type="text" placeholder="Enter Business Name" name="bname" class="form-control" autofocus required>
           </div>
 
              <div class="form-group">
@@ -148,7 +148,7 @@ session_start();
 
                       <div class="form-group">
                         <label for="email" class="pull-left"><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <input type="text" placeholder="Enter Email" name="email" autofocus required>
                       </div>
 
                       <div class="form-group">
@@ -178,7 +178,7 @@ session_start();
 
                             <div class="form-group">
                            <label for="bemail" class="pull-left"><b>Email</b></label>
-                           <input type="text" placeholder="Enter Email" name="bemail" class="form-control" required>
+                           <input type="text" placeholder="Enter Email" name="bemail" class="form-control" autofocus required>
                          </div>
 
                          <div class="form-group">
@@ -208,7 +208,7 @@ session_start();
 
                                   <div class="form-group">
                                  <label for="bemail" class="pull-left"><b>Email</b></label>
-                                 <input type="text" placeholder="Enter Email" name="Aemail" class="form-control" required>
+                                 <input type="text" placeholder="Enter Email" name="Aemail" class="form-control" autofocus required>
                                </div>
 
                                <div class="form-group">

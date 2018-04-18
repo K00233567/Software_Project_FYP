@@ -1,11 +1,11 @@
 <?php
 session_start();
-
+include("../CONFIG/connection.php");
 // CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
 if($_SESSION['Login']===null){
   header('Location: ../index.php');
 }
-
+  $ID =$_SESSION['ID'];
  ?>
 
 <!DOCTYPE html>
@@ -56,11 +56,11 @@ if($_SESSION['Login']===null){
           </div>
 
             <div class="list-group">
-              <button type="button" class="list-group-item">Search for a Venue.</button>
-              <button type="button" class="list-group-item">Search for Caterer.</button>
-              <button type="button" class="list-group-item">Search for Barber/Hairdresser.</button>
-              <button type="button" class="list-group-item">Search for Florist.</button>
-              <button type="button" class="list-group-item">Search for Baker.</button>
+              <a href="./Search.php" type="button" class="list-group-item">Search for a Venue.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Caterer.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Barber/Hairdresser.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Florist.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Baker.</a>
             </div>
 
       </div>
@@ -80,15 +80,63 @@ if($_SESSION['Login']===null){
           <p class="lead" style="text-align:center;">Here is a price estimate of your event!</p>
 
           <div>
-            <table class="table">
-              <tr>
-                <th><h3>Business</h3></th><th><h3>Date</h3></th><th><h3>Price</h3></th>
-              </tr>
+            <?php
+            $connection=mysqli_connect ('localhost', $username, $password);
+            if (!$connection) {  die('Not connected : ' . mysql_error());}
 
-              <tr>
-                <td>Gleneagle Hotel</td> <td>23/04/2018</td> <td>€ 1,000</td>
-              </tr>
-            </table>
+            // Set the active MySQL database
+            $db_selected = mysqli_select_db( $connection,$database);
+            if (!$db_selected) {
+            die ('Can\'t use db : ' . mysqli_error($connection));
+            }
+
+                //Selecting the values for the customer's bookings to insert into panel
+            // $sql = "SELECT 'business.nameB', 'booking.date', 'business.telephone','business.price'
+            //         FROM booking
+            //         INNER JOIN business ON 'business.businessID' = 'booking.idBusiness'";
+
+$sql = "SELECT nameB,date,telephone,price FROM booking INNER JOIN business ON businessID=idBusiness WHERE idCustomer= '$ID'";
+
+                    $result = mysqli_query($connection,$sql);
+                    if (!$result) {
+                    die('Invalid query: ' . mysqli_error($connection));
+                    }
+
+                    // Creating table of bookings and displaying the Headers
+                 echo '<table class="table table-bordered">';
+                 echo '<tr><th>Business</th><th>Date</th><th>Telephone</th><th>Price</th></tr>';
+
+                 while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
+                   $name= $row['nameB'];
+                   $telephone= $row['telephone'];
+                   $date= $row['date'];
+                   $price = $row['price'];
+
+                   // Displaying the values for the table
+                   echo "<tr>
+               <td>$name</td>
+               <td>$date</td>
+               <td>$telephone</td>
+               <td>€$price</td>
+               ";
+}
+
+
+$query = "SELECT SUM(price) FROM business,booking WHERE businessID=idBusiness && idCustomer='$ID'";
+$result = mysqli_query($connection,$query);
+if (!$result) {
+die('Invalid query: ' . mysqli_error($connection));
+}
+While($resultset = mysqli_fetch_assoc($result)){
+  $Total = $resultset['SUM(price)'];
+
+
+echo '<table class="table table-bordered">';
+echo "<tr>
+<td><strong>Total: € $Total</strong></td>
+";
+}
+?>
           </div>
       </div>
 

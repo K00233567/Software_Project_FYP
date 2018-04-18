@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("../CONFIG/connection.php");
+include("../CONFIG/connection.php");
 
 // CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
 if($_SESSION['Login']===null){
@@ -71,7 +71,7 @@ if($_SESSION['Login']===null){
 
     <div class="form-group">
       <label for="name" class="pull-left"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="name" required>
+      <input type="text" placeholder="Enter Name" name="name" autofocus required>
     </div>
 
     <div class="form-group">
@@ -150,7 +150,7 @@ if($_SESSION['Login']===null){
            </td>
 
 
-             <!--CUSTOMER EDIT MODAL-->
+             <!--Admin EDIT MODAL-->
              <div id="AEdit-Modal<?php echo $id ?>" class="modal fade">
 
                <div class="modal-dialog">
@@ -168,7 +168,7 @@ if($_SESSION['Login']===null){
                     </div>
                  <div class="form-group">
                    <label for="name" class="pull-left"><b>Name</b></label>
-                   <input type="text" value="<?php echo $name; ?>" name="name" required>
+                   <input type="text" value="<?php echo $name; ?>" name="name" autofocus required>
                  </div>
 
                  <div class="form-group">

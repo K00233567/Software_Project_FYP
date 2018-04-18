@@ -31,7 +31,7 @@ if($resultCheck  !=1){
 }
 
 //Checking if the account is logged in already
-$loggedIn = "SELECT LoggedIn FROM customer WHERE emailC = '$CustomerEmail'";
+$loggedIn = "SELECT * FROM customer WHERE emailC = '$CustomerEmail'";
 		$isLoggedin = mysqli_query($connection, $loggedIn);
 		$row = mysqli_fetch_assoc($isLoggedin);
 		$login = $row['LoggedIn'];
@@ -53,6 +53,7 @@ $loggedIn = "SELECT LoggedIn FROM customer WHERE emailC = '$CustomerEmail'";
     $login = "CALL customer_logged_in('$CustomerEmail')";  //updates database to say user is logged in
     mysqli_query($connection,$login);
 
+    $_SESSION['ID'] = $row['customerID'];
     $_SESSION['name'] = $row['nameC'];
     $_SESSION['usertype'] = $row['UserType']; //sets session variable for usertype
     $_SESSION['email'] = $row['emailC'];//sets session variable for email

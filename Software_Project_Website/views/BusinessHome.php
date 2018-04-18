@@ -7,6 +7,8 @@ if($_SESSION['Login']===null){
 }
 
 $BusinessEmail = $_SESSION['email'];
+
+include("../CONFIG/connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,7 @@ $BusinessEmail = $_SESSION['email'];
     <title>App</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light" id="navbarMargin" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
+    <nav  class="navbar navbar-default" id="navbarMargin" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
               <span class="icon-bar"></span>
@@ -40,38 +42,101 @@ $BusinessEmail = $_SESSION['email'];
          </ul>
        </div> <!--end of collapse-->
     </nav>
+<section id="BusinessHomeColour">
+
 
     <!-- Search Box -->
 <input id="pac-input" class="controls" type="text" placeholder="Search Location">
 
+
+<!-- <form class="" action="" method="post"> -->
+  <div id="form">
+    <form class="" >
+    <table>
+    <tr><td>Address:</td><td><input type='text' id='address' required> </td> </tr>
+    <tr><td>Telephone:</td><td><input type='text' id='telephone' required> </td> </tr>
+    <tr><td>Type:</td> <td><select id='type'> +
+               <option value='Bar' SELECTED>Bar</option>
+               <option value='Restaurant'>Restaurant</option>
+                <option value='Hotel'>Hotel</option>
+                 <option value='Hairdresser'>Hairdresser</option>
+                  <option value='Florist'>Florist</option>
+                   <option value='Musician'>Musician</option>
+                    <option value='Car rental'>Car rental</option>
+                     <option value='Photographer'>Photographer</option>
+                      <option value='Videographer'>Videographer</option>
+                       <option value='Dress shop'>Dress shop</option>
+                        <option value='Suit shop'>Suit shop</option>
+                         <option value='Makeup artist'>Makeup artist</option>
+               </select> </td></tr>
+               <tr><td>Price estimate:</td><td><input type='text' id='price' required> </td> </tr>
+               <tr><td></td><td><input class="btn btn-primary" type="button"  value='Save' onclick='ajax_post()'  required></td></tr>
+    </table>
+      </form>
+  </div>
+  <!-- </form> -->
+
 <!-- Map to enter business details into database -->
-    <div id="map"></div>
-    <!-- <form class="" action="" method="post"> -->
-      <div id="form">
-        <form class="" >
-        <table>
-        <tr><td>Address:</td><td><input type='text' id='address' required> </td> </tr>
-        <tr><td>Telephone:</td><td><input type='text' id='telephone' required> </td> </tr>
-        <tr><td>Type:</td> <td><select id='type'> +
-                   <option value='Bar' SELECTED>Bar</option>
-                   <option value='Restaurant'>Restaurant</option>
-                    <option value='Hotel'>Hotel</option>
-                     <option value='Hairdresser'>Hairdresser</option>
-                      <option value='Florist'>Florist</option>
-                       <option value='Musician'>Musician</option>
-                        <option value='Car rental'>Car rental</option>
-                         <option value='Photographer'>Photographer</option>
-                          <option value='Videographer'>Videographer</option>
-                           <option value='Dress shop'>Dress shop</option>
-                            <option value='Suit shop'>Suit shop</option>
-                             <option value='Makeup artist'>Makeup artist</option>
-                   </select> </td></tr>
-                   <tr><td>Price estimate:</td><td><input type='text' id='price' required> </td> </tr>
-                   <tr><td></td><td><input class="btn btn-primary" type="button"  value='Save' onclick='ajax_post()'  required></td></tr>
-        </table>
-          </form>
+<div class="row">
+<div class="col-sm-8">
+    <div id="map" style="height: 800px;"></div>
+  </div>
+
+<div class="col-sm-4" id="businessDetailsPanel">
+  <div class="panel panel-default">
+    <div class="businessDetailsPanelColour">
+    <div class="panel-heading">
+        <h2 class="display-1"style="text-align:center;">These are your current details.</h2>
+    </div>
+  </div>
+    <div class="panel-body">
+      <?php
+
+                $connection=mysqli_connect ('localhost', $username, $password);
+                if (!$connection) {  die('Not connected : ' . mysql_error());}
+
+                // Set the active MySQL database
+                $db_selected = mysqli_select_db( $connection,$database);
+                if (!$db_selected) {
+                die ('Can\'t use db : ' . mysqli_error($connection));
+                }
+
+                $sql = "SELECT address, telephone, type, price
+                        FROM business
+                        WHERE emailB= '$BusinessEmail';";
+
+                        $result = mysqli_query($connection,$sql);
+                        if (!$result) {
+                        die('Invalid query: ' . mysqli_error($connection));
+                        }
+
+                        // Creating table of customers and displaying the Headers
+                     echo '<table class="table table-bordered">';
+                     echo '<tr><th>Address</th><th>Telephone</th><th>type</th><th>Price €
+</th></tr>';
+
+                     while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
+                       $address= $row['address'];
+                       $telephone= $row['telephone'];
+                       $type= $row['type'];
+                       $price= $row['price'];
+
+                       // Displaying the values for the table
+                       echo "<tr>
+                   <td>$address</td>
+                   <td>$telephone</td>
+                   <td>$type</td>
+                   <td>$price</td>
+                   ";
+                 }
+      ?>
+
+        </div>
       </div>
-      <!-- </form> -->
+    </div>
+  </div>
+  </section>
+
 
       <script>
         var map;
@@ -83,7 +148,7 @@ $BusinessEmail = $_SESSION['email'];
           var Limerick = {lat: 52.674798308010125, lng: -8.648500465525103};
           map = new google.maps.Map(document.getElementById('map'), {
             center: Limerick,
-            zoom: 9
+            zoom: 7
           });
 
           infowindow = new google.maps.InfoWindow({

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("../CONFIG/connection.php");
+include("../CONFIG/connection.php");
 
 // CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
 if($_SESSION['Login']===null){
@@ -123,7 +123,7 @@ if($_SESSION['Login']===null){
                     </div>
                  <div class="form-group">
                    <label for="name" class="pull-left"><b>Name</b></label>
-                   <input type="text" value="<?php echo $name; ?>" name="name" required>
+                   <input type="text" value="<?php echo $name; ?>" name="name" autofocus required>
                  </div>
 
                  <div class="form-group">
