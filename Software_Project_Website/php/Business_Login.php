@@ -51,10 +51,13 @@ $loggedIn = "SELECT LoggedIn FROM business WHERE emailB = '$BusinessEmail'";
     $login = "CALL business_logged_in('$BusinessEmail')";  //updates database to say user is logged in
     mysqli_query($connection,$login);
 
+    $_SESSION['ID'] = $row['businessID'];//sets session variable for ID
     $_SESSION['usertype'] = $row['Usertype']; //sets session variable for usertype
     $_SESSION['email'] = $row['emailB'];//sets session variable for email
     $_SESSION['Login'] = $row['LoggedIn'];//sets session variable for login
-    $_SESSION['name'] = $row['nameB'];
+    $_SESSION['name'] = $row['nameB']; //sets session variable for name
+
+
     header('Location: ../index.php?login=succescredentials');
   }
 //Checks whether the logged in usertype is a User or Admin

@@ -17,7 +17,7 @@ if($_SESSION['Login']===null){
     <title>App</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
+    <nav class="navbar navbar-default" style="background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
               <span class="icon-bar"></span>
@@ -153,6 +153,8 @@ if($_SESSION['Login']===null){
   </div>
 </div>
 </div>
+
+<!-- Button for Booking a Business -->
 <button class="btn btn-danger btn-lg pull-right" id="Book_button" type="button" name="Book" href="#business_Book_Modal" data-toggle='modal'>Book a business</button>
 
 <div id="business_Book_Modal" class="modal fade">
@@ -264,12 +266,15 @@ if($_SESSION['Login']===null){
               infowincontent.appendChild(document.createElement('br'));
 
               var text = document.createElement('text');
-              text.textContent = price
-              infowincontent.appendChild(text);
-
-              var text = document.createElement('text');
               text.textContent = telephone
               infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+
+
+              var text = document.createElement('text');
+              text.textContent =  price
+              infowincontent.appendChild(text);
+
 
 
 

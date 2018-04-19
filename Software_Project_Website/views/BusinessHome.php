@@ -1,14 +1,14 @@
 <?php
 session_start();
-
+include("../CONFIG/connection.php");
 // CHECKS THAT USER IS LOGGED IN BEFORE ENTRY
 if($_SESSION['Login']===null){
   header('Location: ../index.php');
 }
-
+//Setting Session Variables
 $BusinessEmail = $_SESSION['email'];
+$ID =$_SESSION['ID'];
 
-include("../CONFIG/connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ include("../CONFIG/connection.php");
   <div id="form">
     <form class="" >
     <table>
-    <tr><td>Address:</td><td><input type='text' id='address' required> </td> </tr>
+    <tr><td>Address:</td><td><input type='text' id='address' autofocus required> </td> </tr>
     <tr><td>Telephone:</td><td><input type='text' id='telephone' required> </td> </tr>
     <tr><td>Type:</td> <td><select id='type'> +
                <option value='Bar' SELECTED>Bar</option>
@@ -79,56 +79,81 @@ include("../CONFIG/connection.php");
 <!-- Map to enter business details into database -->
 <div class="row">
 <div class="col-sm-8">
-    <div id="map" style="height: 800px;"></div>
+    <div id="map" ></div>
   </div>
 
 <div class="col-sm-4" id="businessDetailsPanel">
   <div class="panel panel-default">
     <div class="businessDetailsPanelColour">
     <div class="panel-heading">
-        <h2 class="display-1"style="text-align:center;">These are your current details.</h2>
+        <h2 class="display-1"style="text-align:center;">These are your current details & Bookings.</h2>
     </div>
   </div>
     <div class="panel-body">
       <?php
 
-                $connection=mysqli_connect ('localhost', $username, $password);
-                if (!$connection) {  die('Not connected : ' . mysql_error());}
+    $connection=mysqli_connect ('localhost', $username, $password);
+    if (!$connection) {  die('Not connected : ' . mysql_error());}
 
-                // Set the active MySQL database
-                $db_selected = mysqli_select_db( $connection,$database);
-                if (!$db_selected) {
-                die ('Can\'t use db : ' . mysqli_error($connection));
-                }
+    // Set the active MySQL database
+    $db_selected = mysqli_select_db( $connection,$database);
+    if (!$db_selected) {
+    die ('Can\'t use db : ' . mysqli_error($connection));
+    }
 
-                $sql = "SELECT address, telephone, type, price
-                        FROM business
-                        WHERE emailB= '$BusinessEmail';";
+    $sql = "SELECT address, telephone, type, price
+            FROM business
+            WHERE emailB= '$BusinessEmail';";
 
-                        $result = mysqli_query($connection,$sql);
-                        if (!$result) {
-                        die('Invalid query: ' . mysqli_error($connection));
-                        }
+            $result = mysqli_query($connection,$sql);
+            if (!$result) {
+            die('Invalid query: ' . mysqli_error($connection));
+            }
 
-                        // Creating table of customers and displaying the Headers
-                     echo '<table class="table table-bordered">';
-                     echo '<tr><th>Address</th><th>Telephone</th><th>type</th><th>Price €
-</th></tr>';
+            // Creating table of customers and displaying the Headers
+         echo '<table class="table table-bordered">';
+         echo '<tr><th>Address</th><th>Telephone</th><th>type</th><th>Price €</th></tr>';
 
-                     while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
-                       $address= $row['address'];
-                       $telephone= $row['telephone'];
-                       $type= $row['type'];
-                       $price= $row['price'];
+         while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
+           $address= $row['address'];
+           $telephone= $row['telephone'];
+           $type= $row['type'];
+           $price= $row['price'];
 
-                       // Displaying the values for the table
-                       echo "<tr>
-                   <td>$address</td>
-                   <td>$telephone</td>
-                   <td>$type</td>
-                   <td>$price</td>
-                   ";
-                 }
+           // Displaying the values for the table
+           echo "<tr>
+       <td>$address</td>
+       <td>$telephone</td>
+       <td>$type</td>
+       <td>$price</td>
+       ";
+     }
+
+     $booking = "SELECT nameC,date,emailC FROM booking INNER JOIN customer ON customerID=idCustomer WHERE idBusiness= '$ID'";
+
+             $result = mysqli_query($connection,$booking);
+             if (!$result) {
+             die('Invalid query: ' . mysqli_error($connection));
+             }
+
+             // Creating table of customers and displaying the Headers
+          echo '<table class="table table-bordered">';
+          echo '<tr><th>Customer Name</th><th>Customer Email</th><th>Date</th></tr>';
+
+          while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
+            $name= $row['nameC'];
+            $date= $row['date'];
+            $email=$row['emailC'];
+
+
+            // Displaying the values for the table
+            echo "<tr>
+        <td>$name</td>
+        <td>$email</td>
+        <td>$date</td>
+        ";
+      }
+
       ?>
 
         </div>
@@ -271,10 +296,12 @@ include("../CONFIG/connection.php");
   hr.send(vars); // Actually execute the request
     infowindow.close();
     alert("Details Updated!");
+    window.open('../views/BusinessHome.php','_self'); //RELOAD PAGE AFTER SUBMITTING DATA
   }
 
+  </script>
 
-      </script>
+
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&libraries=places&callback=initAutocomplete"
            async defer></script>
 

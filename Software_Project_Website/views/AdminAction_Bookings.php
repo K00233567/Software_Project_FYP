@@ -36,9 +36,9 @@ if($_SESSION['Login']===null){
          <ul class="nav navbar-nav">
 
            <li class =""><a href="Admin.php" class="home">Home</a></li>
-           <li class =""><a href="./AdminAction_Business_Users.php" class="home">Business Users</a></li>
-              <li class =""><a href="adminAction_Bookings.php" class="home">Bookings</a></li>
-           <li class ="active"><a href="#" class="home">Admin Users</a></li>
+           <li class =""><a href="AdminAction_Business_Users.php" class="home">Business Users</a></li>
+           <li class ="active"><a href="#" class="home">Bookings</a></li>
+           <li class =""><a href="./AdminAction_Admin_Users.php" class="home">Admin Users</a></li>
            <li><a href="../php/Admin_Logout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
@@ -56,55 +56,51 @@ if($_SESSION['Login']===null){
 </style>
 
 <div class="row">
-  <button class="btn btn-lg btn-primary" id="AddAdmin_Btn"data-toggle="modal" type="button" href="#Add_Admin">Add Admin</button>
+  <!-- Button for Booking a Business -->
+  <button class="btn btn-danger btn-lg pull-left" id="AddBookingButton" type="button" name="Book" href="#AdminAdd_Booking_Modal" data-toggle='modal'>Add Booking</button>
 </div>
 
+  <div id="AdminAdd_Booking_Modal" class="modal fade">
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h4 class="modal-title">Add Booking</h4>
+          </div>
+          <div class="modal-body">
+    <form class="form" id='Book' action="<?php echo '../php/adminActions.php';?>" method="post">
 
-<div id="Add_Admin" class="modal fade">
-  <div class="modal-dialog">
-     <div class="modal-content">
-        <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h4 class="modal-title">Admin Sign-Up</h4>
-        </div>
-        <div class="modal-body">
-  <form class="form" id= 'AdiminSignup'action="<?php echo '../php/adminActions.php';?>" method="post">
-
-    <div class="form-group">
-      <label for="name" class="pull-left"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="name" autofocus required>
-    </div>
-
-    <div class="form-group">
-      <label for="email" class="pull-left"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="emailA" required>
-    </div>
+         <div class="form-group">
+        <label for="date" class="pull-left"><b>Date</b></label>
+        <input type="date" placeholder="Enter Date" name="date" class="form-control" required>
+      </div>
 
       <div class="form-group">
-      <label for="psw" class="pull-left"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id= 'APassword'  name="Apsw" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters">
-    </div>
-
-    <div class="form-group">
-     <label for="bpsw" class="pull-left"><b>Confirm Password</b></label>
-     <input required type="password" placeholder="Confirm Password"  id='ApasswordConfirm' class="form-control">
+     <label for="idCustomer" class="pull-left"><b>Customer ID</b></label>
+     <input type="text" placeholder="Enter Customer ID" name="customerID" class="form-control" required>
    </div>
 
+   <div class="form-group">
+  <label for="idBusiness" class="pull-left"><b>Business ID</b></label>
+  <input type="text" placeholder="Enter Business ID" name="BusinessID" class="form-control" required>
+  </div>
 
-
-    <button class="btn btn-primary btn-lg" name ="Admin_Added">Save</button>
-    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+      <button class="btn btn-primary btn-lg" name ="Book">Book</button>
+      <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
+   </form>
+        </div>
+      </div>
     </div>
-  </form>
-</div> <!--End of modal-->
-</div>
-</div>
+  </div>
 
 
-<!-- View Customers Panel -->
+
+
+
+<!-- View Bookings Panel -->
 <div class="container">
   <div class="panel panel-default">
-      <div class="panel-heading">Customer Users</div>
+      <div class="panel-heading">Business Users</div>
         <div class="panel-body">
           <?php
 
@@ -117,74 +113,74 @@ if($_SESSION['Login']===null){
           die ('Can\'t use db : ' . mysqli_error($connection));
           }
 
-          $sql = "SELECT idAdmin, name, emailA, LoggedIn
-                  FROM admin
-                  Group by idAdmin;";
+          $sql = "SELECT *
+                  FROM booking
+                  Group by bookingID;";
 
                   $result = mysqli_query($connection,$sql);
                   if (!$result) {
                   die('Invalid query: ' . mysqli_error($connection));
                   }
 
-                  // Creating table of customers and displaying the Headers
+                  // Creating table of bookings and displaying the Headers
                echo '<table class="table table-bordered">';
-               echo '<tr><th>AdminID</th><th>Name</th><th>Email</th><th>LoggedIn</th></tr>';
+               echo '<tr><th>BookingID</th><th>Date</th><th>Customer ID</th><th>Business ID</th></tr>';
 
                while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
-                 $id= $row['idAdmin'];
-                 $name= $row['name'];
-                 $email= $row['emailA'];
-                 $LoggedIn= $row['LoggedIn'];
+                 $id= $row['bookingID'];
+                 $date= $row['date'];
+                 $idCustomer= $row['idCustomer'];
+                 $idBusiness= $row['idBusiness'];
 
                  // Displaying the values for the table
                  echo "<tr>
              <td>$id</td>
-             <td>$name</td>
-             <td>$email</td>
-             <td>$LoggedIn</td>
+             <td>$date</td>
+             <td>$idCustomer</td>
+             <td>$idBusiness</td>
              ";
 ?>
             <!-- Creating 'Edit' and 'Delete' button at each row -->
              <td>
-               <button class="btn btn-primary" type="button" data-toggle="modal" id="Edit" href="#AEdit-Modal<?php echo $id ?>">Edit</button>
-               <button class="btn btn-danger" type="button"  data-toggle="modal" id="Delete"  href="#Adelete<?php echo $id; ?>">Delete</button>
+               <button class="btn btn-primary" type="button" data-toggle="modal" id="Edit" href="#BEdit-Modal<?php echo $id ?>">Edit</button>
+               <button class="btn btn-danger" type="button"  data-toggle="modal" id="Delete"  href="#Bdelete<?php echo $id; ?>">Delete</button>
            </td>
 
 
-             <!--Admin EDIT MODAL-->
-             <div id="AEdit-Modal<?php echo $id ?>" class="modal fade">
+             <!--BOOKING EDIT MODAL-->
+             <div id="BEdit-Modal<?php echo $id ?>" class="modal fade">
 
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Edit Admin</h4>
+                        <h4 class="modal-title">Edit Booking</h4>
                      </div>
                      <div class="modal-body">
                   <form role="form" action="../php/adminActions.php" method="post">
 
                     <div class="form-group">
-                      <label for="name" class="pull-left"><b>Id</b></label>
+                      <label for="id" class="pull-left"><b>Id</b></label>
                       <input type="text" name="id" value="<?php echo $id; ?>" readonly>
                     </div>
                  <div class="form-group">
-                   <label for="name" class="pull-left"><b>Name</b></label>
-                   <input type="text" value="<?php echo $name; ?>" name="name" autofocus required>
+                   <label for="date" class="pull-left"><b>Date </b></label>
+                   <input type="date" value="<?php echo $date; ?>" name="date"  class="form-control" autofocus required>
                  </div>
 
                  <div class="form-group">
-                   <label for="email" class="pull-left"><b>Email</b></label>
-                   <input type="text" value="<?php echo $email; ?>" name="email" required>
+                   <label for="CustomerID" class="pull-left"><b>Customer ID</b></label>
+                   <input type="text" value="<?php echo $idCustomer; ?>" name="idCustomer" readonly>
                  </div>
 
                  <div class="form-group">
-                   <label for="LoggedIn" class="pull-left"><b>LoggedIn</b></label>
-                   <input type="text" value="<?php echo $LoggedIn; ?>" name="LoggedIn" required>
+                   <label for="BusinessID" class="pull-left"><b>Business ID</b></label>
+                   <input type="text" value="<?php echo $idBusiness; ?>" name="idBusiness" readonly>
                  </div>
 
 
 
-                 <button class="btn btn-primary btn-lg" name ="Admin_editted">Save</button>
+                 <button class="btn btn-primary btn-lg" name ="Booking_editted">Save</button>
                  <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">Cancel</button>
                  </div>
                </form>
@@ -193,7 +189,7 @@ if($_SESSION['Login']===null){
              </div>
 
              <!--Delete Modal -->
-   <div id="Adelete<?php echo $id; ?>" class="modal fade" role="dialog">
+   <div id="Bdelete<?php echo $id; ?>" class="modal fade" role="dialog">
        <div class="modal-dialog">
            <form method="post" action="../php/adminActions.php">
                <!-- Modal content-->
@@ -205,14 +201,12 @@ if($_SESSION['Login']===null){
                    </div>
 
                    <div class="modal-body">
-                       <input type="hidden" name="Adelete_id" value="<?php echo $id; ?>">
-                       <input type="hidden" name="LoggedIn_check" value="<?php echo $LoggedIn; ?>">
-
+                       <input type="hidden" name="BookingID" value="<?php echo $id; ?>">
                        <p>
-                           <div class="alert alert-danger">Are you Sure you want Delete <strong><?php echo $name; ?>?</strong></p>
+                           <div class="alert alert-danger">Are you Sure you want Delete the Booking ID <strong><?php echo $id; ?>?</strong></p>
                        </div>
                        <div class="modal-footer">
-                           <button type="submit" name="Adelete" class="btn btn-danger">YES</button>
+                           <button type="submit" name="Booking_Delete" class="btn btn-danger">YES</button>
                            <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
                        </div>
                    </div>
@@ -220,7 +214,7 @@ if($_SESSION['Login']===null){
            </div>
        </div>
    </div>
- </tr>
+           </tr>
 
 
 
@@ -234,10 +228,10 @@ if($_SESSION['Login']===null){
 
            ?>
 
-    </div>
-  </div>
-</div>
 
+        </div>
+      </div>
+</div>
 
 
 

@@ -29,14 +29,6 @@ $sql = "SELECT * FROM business WHERE nameB = '$Name'";
        $businessID= $row['businessID'];
 
 
-
-//
-// $sql = "SELECT 'business.nameB', 'booking.date', 'business.telephone','business.price' FROM booking INNER JOIN business ON 'business.businessID' = 'booking.idBusiness'";
-// }
-
-
-
-
 //Cecking if the date entered is a past date
 if(strtotime($Date)<strtotime("today")){
 
@@ -48,8 +40,8 @@ if(strtotime($Date)<strtotime("today")){
 }
 else{
   //Inserting Booking details into database
-$Book = "INSERT INTO booking(date,idCustomer,idBusiness) VALUES ('$Date','$customerID','$businessID')";
-// $Book= "CALL booking_business('$Date','$customerID','$businessID')";
+
+$Book= "CALL booking_business('$Date','$customerID','$businessID')";
 $result = mysqli_query($connection,$Book);
 if (!$result) {
 die('Invalid query: ' . mysqli_error($connection));

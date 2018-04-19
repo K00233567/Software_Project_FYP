@@ -20,7 +20,7 @@ $LoggedIn=$_POST['LoggedIn'];
 
 
 //UPDATE STATEMENT TO CUSTOMER TABLE
-$sql= "UPDATE customer SET nameC= '$name',emailC='$email',LoggedIn='$LoggedIn' WHERE customerID = '$id'";
+$sql= "Call AdminAction_CustomerUpdate('$name','$email','$LoggedIn','$id')";
  $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/Admin.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 
@@ -29,16 +29,17 @@ $sql= "UPDATE customer SET nameC= '$name',emailC='$email',LoggedIn='$LoggedIn' W
 
 //DELETING CUSTOMER
 if(isset($_POST['delete'])){
-  $id=$_POST['delete_id'];
+  $id=$_POST['Bdelete_id'];
 
 
-$sql= "DELETE FROM `customer` WHERE customerID= '$id'";
+
+$sql= "CALL delete_Customer('$id')";
 $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/Admin.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 }
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //UPDATING BUSINESS DETAILS
 if(isset($_POST['Business_editted'])){
@@ -49,24 +50,25 @@ $LoggedIn=$_POST['LoggedIn'];
 
 
 //UPDATE STATEMENT TO BUSINESS TABLE
-$sql= "UPDATE business SET nameB= '$name',emailB='$email',LoggedIn='$LoggedIn' WHERE businessID = '$id'";
+$sql="CALL adminAction_BusinessUpdate('$name','$email','$LoggedIn','$id')";
  $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/AdminAction_Business_Users.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 
 }
 
-//DELETING CUSTOMER
+//DELETING BUSINESS
 if(isset($_POST['Bdelete'])){
   $id=$_POST['Bdelete_id'];
 
 
-$sql= "DELETE FROM `business` WHERE businessID= '$id'";
+// $sql= "DELETE FROM `business` WHERE businessID= '$id'";
+$sql= "CALL delete_Business('$id')";
 $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/AdminAction_Business_Users.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 }
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //UPDATING ADMIN DETAILS
@@ -78,7 +80,7 @@ $LoggedIn=$_POST['LoggedIn'];
 
 
 //UPDATE STATEMENT TO ADMIN TABLE
-$sql= "UPDATE admin SET name= '$name',emailA='$email',LoggedIn='$LoggedIn' WHERE idAdmin = '$id'";
+$sql= "CALL adminAction_AdminUpdate('$name','$email','$LoggedIn','$id')";
  $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/AdminAction_Admin_Users.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 
@@ -97,7 +99,8 @@ if(isset($_POST['Adelete'])){
   }
   else{
 
-$sql= "DELETE FROM `admin` WHERE idAdmin= '$id'";
+
+$sql="CALL delete_Admin('$id')";
 $result=mysqli_query($connection,$sql);
  echo "<script>window.open('../views/AdminAction_Admin_Users.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
 }
@@ -123,4 +126,79 @@ if(isset($_POST['Admin_Added'])){
     }
 }
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//UPDATING BOOKING DETAILS
+if(isset($_POST['Booking_editted'])){
+$id=$_POST['id'];
+$date= $_POST['date'];
+$idCustomer=$_POST['idCustomer'];
+$idBusiness=$_POST['idBusiness'];
+
+
+//Cecking if the date entered is a past date
+if(strtotime($date)<strtotime("today")){
+
+  echo "<SCRIPT type='text/javascript'> //not showing me this
+        alert('Sorry, you cannnot pick a past date!');
+        window.location.replace('../views/AdminAction_Bookings.php');
+    </SCRIPT>";
+    exit();
+} else{
+
+//UPDATE STATEMENT TO BOOKING TABLE
+$sql= "UPDATE booking SET date= '$date' WHERE bookingID = '$id'";
+ $result=mysqli_query($connection,$sql);
+ echo "<script>window.open('../views/AdminAction_Bookings.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
+
+  }
+}
+
+//DELETING a Booking
+if(isset($_POST['Booking_Delete'])){
+  $id=$_POST['BookingID'];
+
+$sql= "DELETE FROM `booking` WHERE bookingID= '$id'";
+$result=mysqli_query($connection,$sql);
+ echo "<script>window.open('../views/AdminAction_bookings.php','_self') </script>"; //RELOAD PAGE AFTER SUBMITTING DATA
+}
+
+
+
+
+//ADDING a Booking
+if(isset($_POST['Book'])){
+$Date =$_POST['date'];
+$idCustomer =$_POST['customerID'];
+$idBusiness=$_POST['BusinessID'];
+
+//Cecking if the date entered is a past date
+if(strtotime($Date)<strtotime("today")){
+
+  echo "<SCRIPT type='text/javascript'> //not showing me this
+        alert('Sorry, you cannnot pick a past date!');
+        window.location.replace('../views/AdminAction_Bookings.php');
+    </SCRIPT>";
+    exit();
+} else{
+
+//Inserting booking details into booking table
+$Book = "INSERT INTO booking(date,idCustomer,idBusiness) VALUES ('$Date','$idCustomer','$idBusiness')";
+
+$result = mysqli_query($connection,$Book);
+if (!$result) {
+die('Invalid query: ' . mysqli_error($connection));
+}else{
+  echo "<SCRIPT type='text/javascript'> //not showing me this
+        alert('Booking has been added!');
+        window.location.replace('../views/AdminAction_Bookings.php');
+    </SCRIPT>";    }
+  }
+}
  ?>

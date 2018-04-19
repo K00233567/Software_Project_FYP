@@ -27,7 +27,7 @@ $userDetails =  mysqli_query($connection,$userRow);
 //To check the number of rows returned
 $resultCheck = mysqli_num_rows($userDetails);
 
-//Checks to see if email already exists.
+//Checks to see if email exists.
 if($resultCheck  !=1){
   $_SESSION["Login.Error"] = "This is not a registered email address";
 
@@ -36,7 +36,7 @@ if($resultCheck  !=1){
 }
 
 //Checking if the account is logged in already
-$loggedIn = "SELECT LoggedIn FROM customer WHERE emailC = '$CustomerEmail'";
+$loggedIn = "SELECT LoggedIn FROM admin WHERE emailA = '$AdminEmail'";
 		$isLoggedin = mysqli_query($connection, $loggedIn);
 		$row = mysqli_fetch_assoc($isLoggedin);
 		$login = $row['LoggedIn'];

@@ -36,9 +36,10 @@ if($_SESSION['Login']===null){
          <ul class="nav navbar-nav">
 
            <li class ="active"><a href="Admin.php" class="home">Home</a></li>
-           <li class =""><a href="#" class="home">Business Users</a></li>
+           <li class ="active"><a href="#" class="home">Business Users</a></li>
+           <li class =""><a href="AdminAction_Bookings.php" class="home">Bookings</a></li>
            <li class =""><a href="./AdminAction_Admin_Users.php" class="home">Admin Users</a></li>
-           <li><a href="../php/Customer_signout.php" class="Logout">Logout</a></li>
+           <li><a href="../php/Admin_Logout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 
@@ -55,7 +56,7 @@ if($_SESSION['Login']===null){
 </style>
 
 
-<!-- View Customers Panel -->
+<!-- View Business Panel -->
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-heading">Business Users</div>
@@ -80,7 +81,7 @@ if($_SESSION['Login']===null){
                   die('Invalid query: ' . mysqli_error($connection));
                   }
 
-                  // Creating table of customers and displaying the Headers
+                  // Creating table of businesses and displaying the Headers
                echo '<table class="table table-bordered">';
                echo '<tr><th>BusinessID</th><th>Name</th><th>Email</th><th>LoggedIn</th></tr>';
 
@@ -105,7 +106,7 @@ if($_SESSION['Login']===null){
            </td>
 
 
-             <!--CUSTOMER EDIT MODAL-->
+             <!--BUSINESS EDIT MODAL-->
              <div id="BEdit-Modal<?php echo $id ?>" class="modal fade">
 
                <div class="modal-dialog">

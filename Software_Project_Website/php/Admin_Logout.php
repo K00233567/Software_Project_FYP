@@ -12,7 +12,7 @@ session_start();
  die ('Can\'t use db : ' . mysqli_error($connection));
  }
 
- $userRow = "UPDATE admin SET LoggedIn = 0 WHERE emailA = '$AdminEmail'";
+ $userRow = "CALL admin_Logout('$AdminEmail')";
  $Logout =  mysqli_query($connection,$userRow);
 
  session_unset();

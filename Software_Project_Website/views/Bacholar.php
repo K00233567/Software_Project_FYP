@@ -1,4 +1,4 @@
-<?php
+href="./Search.php" <?php
 session_start();
 include("../CONFIG/connection.php");
 
@@ -58,11 +58,11 @@ $ID =$_SESSION['ID'];
           </div>
 
             <div class="list-group">
-              <button type="button" class="list-group-item">Search for a Venue.</button>
-              <button type="button" class="list-group-item">Search for Caterer.</button>
-              <button type="button" class="list-group-item">Search for Barber/Hairdresser.</button>
-              <button type="button" class="list-group-item">Search for Florist.</button>
-              <button type="button" class="list-group-item">Search for Baker.</button>
+              <a href="./Search.php" type="button" class="list-group-item">Search for a Venue.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Caterer.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Barber/Hairdresser.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Florist.</a>
+              <a href="./Search.php" type="button" class="list-group-item">Search for Baker.</a>
             </div>
 
       </div>
@@ -91,36 +91,34 @@ $ID =$_SESSION['ID'];
           die ('Can\'t use db : ' . mysqli_error($connection));
           }
 
-              //Selecting the values for the customer's bookings to insert into panel
-          // $sql = "SELECT 'business.nameB', 'booking.date', 'business.telephone','business.price'
-          //         FROM booking
-          //         INNER JOIN business ON 'business.businessID' = 'booking.idBusiness'";
+          //Selecting the values for the customer's bookings to insert into panel
+     $sql="SELECT nameB,date,telephone,emailB,price FROM booking INNER JOIN business ON businessID=idBusiness WHERE idCustomer= '$ID'";
 
-          $sql = "SELECT nameB,date,telephone,price FROM booking INNER JOIN business ON businessID=idBusiness WHERE idCustomer= '$ID'";
+                        $result = mysqli_query($connection,$sql);
+                        if (!$result) {
+                        die('Invalid query: ' . mysqli_error($connection));
+                        }
 
-                  $result = mysqli_query($connection,$sql);
-                  if (!$result) {
-                  die('Invalid query: ' . mysqli_error($connection));
-                  }
+                        // Creating table of bookings and displaying the Headers
+                     echo '<table class="table table-bordered">';
+                     echo '<tr><th>Business</th><th>Date</th><th>Telephone</th><th>Business Email</th><th>Price</th></tr>';
 
-                  // Creating table of bookings and displaying the Headers
-               echo '<table class="table table-bordered">';
-               echo '<tr><th>Business</th><th>Date</th><th>Telephone</th><th>Price</th></tr>';
+                     while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
+                       $name= $row['nameB'];
+                       $telephone= $row['telephone'];
+                       $date= $row['date'];
+                      $email = $row['emailB'];
+                       $price = $row['price'];
 
-               while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
-                 $name= $row['nameB'];
-                 $telephone= $row['telephone'];
-                 $date= $row['date'];
-                 $price = $row['price'];
-
-                 // Displaying the values for the table
-                 echo "<tr>
-             <td>$name</td>
-             <td>$date</td>
-             <td>$telephone</td>
-             <td>€$price</td>
-             ";
-          }
+                       // Displaying the values for the table
+                       echo "<tr>
+                   <td>$name</td>
+                   <td>$date</td>
+                   <td>$telephone</td>
+                   <td>$email</td>
+                   <td>€$price</td>
+                   ";
+    }
 
 
           $query = "SELECT SUM(price) FROM business,booking WHERE businessID=idBusiness && idCustomer='$ID'";

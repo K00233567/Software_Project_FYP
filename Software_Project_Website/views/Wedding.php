@@ -90,12 +90,8 @@ if($_SESSION['Login']===null){
             die ('Can\'t use db : ' . mysqli_error($connection));
             }
 
-                //Selecting the values for the customer's bookings to insert into panel
-            // $sql = "SELECT 'business.nameB', 'booking.date', 'business.telephone','business.price'
-            //         FROM booking
-            //         INNER JOIN business ON 'business.businessID' = 'booking.idBusiness'";
-
-$sql = "SELECT nameB,date,telephone,price FROM booking INNER JOIN business ON businessID=idBusiness WHERE idCustomer= '$ID'";
+      //Selecting the values for the customer's bookings to insert into panel
+ $sql="SELECT nameB,date,telephone,emailB,price FROM booking INNER JOIN business ON businessID=idBusiness WHERE idCustomer= '$ID'";
 
                     $result = mysqli_query($connection,$sql);
                     if (!$result) {
@@ -104,12 +100,13 @@ $sql = "SELECT nameB,date,telephone,price FROM booking INNER JOIN business ON bu
 
                     // Creating table of bookings and displaying the Headers
                  echo '<table class="table table-bordered">';
-                 echo '<tr><th>Business</th><th>Date</th><th>Telephone</th><th>Price</th></tr>';
+                 echo '<tr><th>Business</th><th>Date</th><th>Telephone</th><th>Business Email</th><th>Price</th></tr>';
 
                  while ($row = mysqli_fetch_assoc($result)) { //fetch associative array from result
                    $name= $row['nameB'];
                    $telephone= $row['telephone'];
                    $date= $row['date'];
+                  $email = $row['emailB'];
                    $price = $row['price'];
 
                    // Displaying the values for the table
@@ -117,12 +114,14 @@ $sql = "SELECT nameB,date,telephone,price FROM booking INNER JOIN business ON bu
                <td>$name</td>
                <td>$date</td>
                <td>$telephone</td>
+               <td>$email</td>
                <td>€$price</td>
                ";
 }
 
-
+//Adding the prices of all bookings
 $query = "SELECT SUM(price) FROM business,booking WHERE businessID=idBusiness && idCustomer='$ID'";
+// $query = "CALL event_Total('$ID')";
 $result = mysqli_query($connection,$query);
 if (!$result) {
 die('Invalid query: ' . mysqli_error($connection));
@@ -137,13 +136,10 @@ echo "<tr>
 ";
 }
 ?>
-          </div>
+        </div>
       </div>
-
-
-
-  </div>
-</div> <!--END OF COL-->
+    </div>
+  </div> <!--END OF COL-->
 </div> <!--END OF ROW-->
 
 </section>

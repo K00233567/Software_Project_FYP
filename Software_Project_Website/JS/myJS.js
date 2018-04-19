@@ -23,3 +23,19 @@ $("#signup").submit(function(event){
     alert("Thank you for registering, please log in.");
   }
 });
+
+
+
+
+//Admin ADD_Admin FORM PASSWORD CHECK
+
+//on submitting the sign up form, the values are first checked to ensure they are correct
+$("#AdiminSignup").submit(function(event){
+  if($('#APassword').val() != $('#ApasswordConfirm').val()){
+    event.preventDefault();
+    alert("Passwords do not match!");
+  }
+  else{
+    alert("Thank you for registering, please log in.");
+  }
+});

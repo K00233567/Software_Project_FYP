@@ -37,8 +37,9 @@ if($_SESSION['Login']===null){
 
            <li class ="active"><a href="#" class="home">Home</a></li>
            <li class =""><a href="./AdminAction_Business_Users.php" class="home">Business Users</a></li>
+           <li class =""><a href="AdminAction_Bookings.php" class="home">Bookings</a></li>
            <li class =""><a href="./AdminAction_Admin_Users.php" class="home">Admin Users</a></li>
-           <li><a href="../php/Customer_signout.php" class="Logout">Logout</a></li>
+           <li><a href="../php/Admin_Logout.php" class="Logout">Logout</a></li>
          </ul>
        </div> <!--end of collapse-->
 

@@ -16,7 +16,7 @@ session_start();
       <header id="header">
           <div class="container">
             <div id="logo" class="pull-left">
-              <a class="LogoStyle"  href="#ASignInModal" data-toggle='modal'>NOA</a>
+              <a class="LogoStyle"  href="#ASignInModal" data-toggle='modal'>Price Wise</a>
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
