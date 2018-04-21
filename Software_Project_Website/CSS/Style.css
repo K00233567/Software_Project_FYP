@@ -29,12 +29,12 @@
 
 
 @font-face {
-	font-family: AlexBrush;
-src: url(../Fonts/AlexBrush-Regular.ttf);
+	font-family: GreatVibes-Regular;
+src: url(../Fonts/GreatVibes-Regular.otf);
 }
 
 #indexHeading{
-	font-family: AlexBrush;
+
 }
 
 
@@ -181,8 +181,10 @@ ul li a{
 
 }
 
-.LogoStyle{
+.LogoStyle,#LogoStyle{
 	color: white;
+  font-family: GreatVibes-Regular;
+	text-decoration: underline;
 }
 
 .nav-menu, .nav-menu * {

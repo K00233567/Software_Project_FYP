@@ -28,7 +28,7 @@ $ID =$_SESSION['ID'];
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-         <a class="navbar-brand" href="#">NOA |</a>
+          <a id="LogoStyle" class="navbar-brand" href="#">EventPrice</a>
          <ul class="nav navbar-nav">
              <li href="#" class="Name">Hello <?php echo $_SESSION['name']; ?> </li>
          </ul>

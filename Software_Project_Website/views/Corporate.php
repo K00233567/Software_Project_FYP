@@ -25,7 +25,7 @@ $ID =$_SESSION['ID'];
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-         <a class="navbar-brand" href="./CustomerHome.php">NOA</a>
+         <a id="LogoStyle" class="navbar-brand" href="#">EventPrice</a>
        </div> <!--end of navbar-header-->
        <div class="corporateColour">
        <div class= "collapse navbar-collapse" id="myNavbar">

@@ -7,7 +7,7 @@ session_start();
     <meta charset="utf-8">
     <link rel="stylesheet" href="./CSS/bootstrap.min.css">
     <link rel="stylesheet" href="./CSS/Style.css">
-    <title>App</title>
+    <title>EventPrice</title>
   </head>
   <body>
 
@@ -16,7 +16,7 @@ session_start();
       <header id="header">
           <div class="container">
             <div id="logo" class="pull-left">
-              <a class="LogoStyle"  href="#ASignInModal" data-toggle='modal'>NOA</a>
+              <a class="LogoStyle"  href="#ASignInModal" data-toggle='modal'>EventPrice</a>
             </div>
             <nav id="nav-menu-container">
               <ul class="nav-menu">
