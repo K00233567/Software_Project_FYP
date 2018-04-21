@@ -40,16 +40,17 @@ if(strtotime($Date)<strtotime("today")){
 }
 else{
   //Inserting Booking details into database
-
 $Book= "CALL booking_business('$Date','$customerID','$businessID')";
-$result = mysqli_query($connection,$Book);
-if (!$result) {
+$query = mysqli_query($connection,$Book);
+
+if (!$query) {
 die('Invalid query: ' . mysqli_error($connection));
-}else{
-header('Location: ../views/Search.php');
-echo '<script language="javascript">';
-echo 'alert("The business has been booked!")';
-echo '</script>';
+}
+else{
+echo "<SCRIPT type='text/javascript'> //not showing me this
+      alert('The business has been booked!');
+      window.location.replace('../views/Search.php');
+  </SCRIPT>";
 
     }
   }

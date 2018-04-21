@@ -110,7 +110,7 @@ $ID =$_SESSION['ID'];
             die('Invalid query: ' . mysqli_error($connection));
             }
 
-            // Creating table of customers and displaying the Headers
+            // Creating table for business details
          echo '<table class="table table-bordered">';
          echo '<tr><th>Address</th><th>Telephone</th><th>type</th><th>Price €</th></tr>';
 
@@ -136,7 +136,7 @@ $ID =$_SESSION['ID'];
              die('Invalid query: ' . mysqli_error($connection));
              }
 
-             // Creating table of customers and displaying the Headers
+             // Creating table of bookings to display in panel
           echo '<table class="table table-bordered">';
           echo '<tr><th>Customer Name</th><th>Customer Email</th><th>Date</th></tr>';
 
@@ -151,9 +151,9 @@ $ID =$_SESSION['ID'];
         <td>$name</td>
         <td>$email</td>
         <td>$date</td>
-        ";
+      ";
       }
-
+  echo '</table>'
       ?>
 
         </div>
@@ -304,6 +304,15 @@ $ID =$_SESSION['ID'];
 
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCTJAUnNDdnvMhkqtHencorjWQyAJBQz0&libraries=places&callback=initAutocomplete"
            async defer></script>
+
+           <!-- Footer -->
+           <footer class="text-center" id="Footer">
+           </a><br>
+           <h3>NOA</h3>
+           <h5>Copyright of Keith Murphy</h5>
+           </footer>
+
+
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

@@ -12,6 +12,7 @@ session_start();
  die ('Can\'t use db : ' . mysqli_error($connection));
  }
 
+//Logs user out by updating their LoggedIn column from 1 to 0
  $userRow = "CALL admin_Logout('$AdminEmail')";
  $Logout =  mysqli_query($connection,$userRow);
 

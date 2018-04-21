@@ -11,7 +11,8 @@ session_start();
  if (!$db_selected) {
  die ('Can\'t use db : ' . mysqli_error($connection));
  }
-
+ 
+//Logs user out by updating their LoggedIn column from 1 to 0
  $userRow = "UPDATE business SET LoggedIn = 0 WHERE emailB = '$BusinessEmail'";
  $Logout =  mysqli_query($connection,$userRow);
 

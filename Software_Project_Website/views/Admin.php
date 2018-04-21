@@ -181,18 +181,10 @@ if($_SESSION['Login']===null){
 
 
 
-<?php
-        }//end of while loop
-
-
-           ?>
-
-
-        </div>
-      </div>
+<?php  }//end of while loop   ?>
+    </div>
+  </div>
 </div>
-
-
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

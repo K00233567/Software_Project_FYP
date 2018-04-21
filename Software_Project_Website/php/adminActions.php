@@ -90,6 +90,8 @@ $sql= "CALL adminAction_AdminUpdate('$name','$email','$LoggedIn','$id')";
 if(isset($_POST['Adelete'])){
   $id=$_POST['Adelete_id'];
   $LoggedIn= $_POST['LoggedIn_check'];
+
+  //Checking if Admin is logged in
   if($LoggedIn == 1){
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Cannot delete, Admin is logged in');

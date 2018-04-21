@@ -316,7 +316,14 @@ if($_SESSION['Login']===null){
 
 
       </script>
-
+      <!-- Footer -->
+      <footer class="text-center" id="Footer">
+      <a class="up-arrow" href="./Search.php" data-toggle="tooltip" title="Back to top">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+      </a><br>
+      <h3>NOA</h3>
+      <h5>Copyright of Keith Murphy</h5>
+      </footer>
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/jquery-ui.min.js"></script>

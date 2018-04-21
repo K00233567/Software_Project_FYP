@@ -155,6 +155,14 @@ if($_SESSION['Login']===null){
   </div>
 </div>
 
+<!-- Footer -->
+<footer class="text-center" id="Footer">
+<br><a class="up-arrow" href="./CustomerHome.php" data-toggle="tooltip" title="Back to top">
+<span class="glyphicon glyphicon-chevron-up"></span>
+</a><br>
+<h3>PriceEvents</h3>
+<h5>Copyright of Keith Murphy</h5>
+</footer>
 
 <script src="../JS/jquery.min.js"></script>
 <script src="../JS/bootstrap.min.js"></script>

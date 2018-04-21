@@ -170,12 +170,12 @@ if($_SESSION['Login']===null){
 
                  <div class="form-group">
                    <label for="CustomerID" class="pull-left"><b>Customer ID</b></label>
-                   <input type="text" value="<?php echo $idCustomer; ?>" name="idCustomer" readonly>
+                   <input type="text" value="<?php echo $idCustomer; ?>" name="idCustomer">
                  </div>
 
                  <div class="form-group">
                    <label for="BusinessID" class="pull-left"><b>Business ID</b></label>
-                   <input type="text" value="<?php echo $idBusiness; ?>" name="idBusiness" readonly>
+                   <input type="text" value="<?php echo $idBusiness; ?>" name="idBusiness">
                  </div>
 
 
